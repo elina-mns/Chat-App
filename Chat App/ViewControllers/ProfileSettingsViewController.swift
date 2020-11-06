@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FBSDKLoginKit
 
 class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -16,6 +17,7 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -33,12 +35,20 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        showAlert(title: "Log out", message: "Are you sure you would like to log out?") {
+            FBSDKLoginKit.LoginManager().logOut()
+            
+            do {
+                try FirebaseAuth.Auth.auth().signOut()
+                let vc = LoginVC()
+                let navigation = UINavigationController(rootViewController: vc)
+                navigation.modalPresentationStyle = .fullScreen
+                present(navigation, animated: true)
+            }
+            catch {
+                print("Failed to log out")
+            }
+        }
         
-        do {
-            try FirebaseAuth.Auth.auth().signOut()
-        }
-        catch {
-            print("Failed to log out")
-        }
     }
 }
