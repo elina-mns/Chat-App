@@ -30,6 +30,7 @@ class LoginVC: UIViewController, LoginButtonDelegate {
           // Automatically sign in the user
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +39,16 @@ class LoginVC: UIViewController, LoginButtonDelegate {
         if AccessToken.current !=  nil {
             self.performSegue(withIdentifier: "didLogin", sender: self)
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        perform(#selector(showChat), with: self, afterDelay: 1)
+    }
+    
+    @objc
+    func showChat() {
+        performSegue(withIdentifier: "showChat", sender: self)
     }
     
     func setLoggingIn(_ loggingIn: Bool) {

@@ -43,7 +43,7 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 let vc = LoginVC()
                 let navigation = UINavigationController(rootViewController: vc)
                 navigation.modalPresentationStyle = .fullScreen
-                present(navigation, animated: true)
+                self.present(navigation, animated: true)
             }
             catch {
                 print("Failed to log out")
