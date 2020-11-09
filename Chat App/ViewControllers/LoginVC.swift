@@ -17,6 +17,7 @@ class LoginVC: UIViewController, LoginButtonDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var isLogginIn = false
+    var observer: NSObjectProtocol?
     
     @IBAction func didTapSignOut(_ sender: AnyObject) {
       GIDSignIn.sharedInstance().signOut()
@@ -24,13 +25,21 @@ class LoginVC: UIViewController, LoginButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator.hidesWhenStopped = true
+        observer = NotificationCenter.default.addObserver(forName: .didLogInNotification, object: nil, queue: .main, using: { [weak self] _ in
+        guard self != nil else { return }
+            self?.performSegue(withIdentifier: "showChat", sender: self)
+        })
+        guard let indicator = activityIndicator else { return }
+        indicator.hidesWhenStopped = true
         loginWithFB.delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
-          // Automatically sign in the user
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
-        
-        
+    }
+    
+    deinit {
+        if let observer = observer {
+            NotificationCenter.default.removeObserver(observer)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -43,12 +52,6 @@ class LoginVC: UIViewController, LoginButtonDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        perform(#selector(showChat), with: self, afterDelay: 1)
-    }
-    
-    @objc
-    func showChat() {
-        performSegue(withIdentifier: "showChat", sender: self)
     }
     
     func setLoggingIn(_ loggingIn: Bool) {

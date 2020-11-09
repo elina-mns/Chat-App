@@ -76,7 +76,7 @@
                         <outlet property="activityIndicator" destination="eod-3L-5Ie" id="uZF-A6-4TO"/>
                         <outlet property="loginWithFB" destination="fRt-vY-vRg" id="d5l-KK-cUV"/>
                         <outlet property="loginWithGoogle" destination="D65-MU-IDY" id="PoZ-9q-inW"/>
-                        <segue destination="hzT-Vz-3e3" kind="show" identifier="showChat" id="6if-wQ-uQO"/>
+                        <segue destination="hzT-Vz-3e3" kind="showDetail" identifier="showChat" id="6if-wQ-uQO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

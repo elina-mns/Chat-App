@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-        GIDSignIn.sharedInstance().clientID = "chat-app-294816"
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         return true
     }
@@ -43,6 +43,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             }
             return
         }
+        guard let user = user else { return }
+        guard let email = user.profile.email,
+              let firstName = user.profile.givenName,
+              let lastName = user.profile.familyName else { return }
+        
+        DatabaseManager.shared.addUser(user: ProfileInfo(firstName: firstName,
+                                                         lastName: lastName,
+                                                         email: email,
+                                                         id: user.userID))
+        guard let authentication = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                       accessToken: authentication.accessToken)
+        FirebaseAuth.Auth.auth().signIn(with: credential, completion: { authResult, error in
+            guard authResult != nil, error == nil else {
+                print("Invalid google credential")
+                return
+            }
+            print("Successfully signed in with Google cred.")
+            NotificationCenter.default.post(name: .didLogInNotification, object: nil)
+        })
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        print("Google user was disconnected")
     }
 
 

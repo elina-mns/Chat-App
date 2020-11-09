@@ -11,5 +11,5 @@ struct ProfileInfo {
     let firstName: String
     let lastName: String
     let email: String
-    static var isFromFacebook: Bool = false
+    let id: String
 }

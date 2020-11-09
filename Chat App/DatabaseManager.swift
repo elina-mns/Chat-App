@@ -13,7 +13,7 @@ class DatabaseManager {
     private let dataBase = Database.database().reference()
     
     func addUser(user: ProfileInfo) {
-        dataBase.child(user.email).setValue([
+        dataBase.child(user.id).setValue([
             "first_name": user.firstName,
             "last_name": user.lastName
         ])
