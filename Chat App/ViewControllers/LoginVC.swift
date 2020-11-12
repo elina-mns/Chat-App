@@ -9,12 +9,13 @@ import UIKit
 import FBSDKLoginKit
 import Firebase
 import GoogleSignIn
+import JGProgressHUD
 
 class LoginVC: UIViewController, LoginButtonDelegate {
 
     @IBOutlet weak var loginWithGoogle: GIDSignInButton!
     @IBOutlet weak var loginWithFB: FBLoginButton!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    let activityIndicator = JGProgressHUD(style: .light)
     
     var isLogginIn = false
     var observer: NSObjectProtocol?
@@ -29,9 +30,8 @@ class LoginVC: UIViewController, LoginButtonDelegate {
         guard self != nil else { return }
             self?.performSegue(withIdentifier: "showChat", sender: self)
         })
-        guard let indicator = activityIndicator else { return }
-        indicator.hidesWhenStopped = true
         loginWithFB.delegate = self
+        loginWithFB.permissions = ["public_profile ", "email"]
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
     }
@@ -41,26 +41,21 @@ class LoginVC: UIViewController, LoginButtonDelegate {
             NotificationCenter.default.removeObserver(observer)
         }
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if AccessToken.current !=  nil {
-            self.performSegue(withIdentifier: "didLogin", sender: self)
-        }
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if AccessToken.current !=  nil {
+            self.performSegue(withIdentifier: "showChat", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showChat" {
+            segue.destination.modalPresentationStyle = .fullScreen
+        }
     }
     
     func setLoggingIn(_ loggingIn: Bool) {
-        if loggingIn {
-            activityIndicator.isHidden = false
-            activityIndicator.startAnimating()
-        } else {
-            activityIndicator.stopAnimating()
-        }
         loginWithGoogle.isEnabled = !loggingIn
         loginWithFB.isEnabled = !loggingIn
     }
@@ -70,6 +65,9 @@ class LoginVC: UIViewController, LoginButtonDelegate {
             print("User failed to log in with facebook")
             return
         }
+        
+        activityIndicator.show(in: view)
+        
         let facebookRequest = FBSDKLoginKit.GraphRequest(graphPath: "me",
                                                          parameters: ["fields":
                                                                         "email, first_name, last_name, picture.type(large)"],
@@ -84,6 +82,49 @@ class LoginVC: UIViewController, LoginButtonDelegate {
                 return
             }
             print(result)
+          
+            guard let firstName = result["first_name"] as? String,
+                  let lastName = result["last_name"] as? String,
+                  let email = result["email"] as? String,
+                  let picture = result["picture"] as? [String: Any],
+                  let data = picture["data"] as? [String: Any],
+                  let pictureURL = data["url"] as? String,
+                  let userId = result["id"] as? String else {
+                print("Failed to get email and name from Facebook")
+                return
+            }
+            
+            let chatUser = ProfileInfo(firstName: firstName, lastName: lastName, email: email, id: userId)
+            
+            DatabaseManager.shared.addUser(user: chatUser, completion: { success in
+                guard success, let url = URL(string: pictureURL) else {
+                    return
+                }
+                URLSession.shared.dataTask(with: url, completionHandler: { data, _, _ in
+                    guard let data = data else { return }
+                    //then download the bytes from this URL
+                    let fileName = chatUser.profilePicFileName
+                    StorageFirebase.shared.uploadProfilePicture(with: data, fileName: fileName, completion: {
+                        result in
+                        switch result {
+                        case .success(let downloadURL):
+                            UserDefaults.standard.set(downloadURL, forKey: "profile_picture_url")
+                            print(downloadURL)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    })
+                }).resume()
+            })
+            let credential = FacebookAuthProvider.credential(withAccessToken: token)
+            Auth.auth().signIn(with: credential) { (authResult, error) in
+                guard authResult != nil, error == nil else {
+                    print(error?.localizedDescription ?? "Invalid facebook cred")
+                    return
+                }
+                print("Successfully signed in with facebook cred.")
+                NotificationCenter.default.post(name: .didLogInNotification, object: nil)
+            }
         })
     }
     

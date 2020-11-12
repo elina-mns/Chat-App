@@ -35,8 +35,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Chat App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLQ-Br-JGy">
-                                <rect key="frame" x="153" y="288" width="127" height="30"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="mxV-aa-EuM">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLQ-Br-JGy">
+                                <rect key="frame" x="152.5" y="288" width="109.5" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -55,25 +58,23 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="eod-3L-5Ie">
-                                <rect key="frame" x="191" y="355" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="oLQ-Br-JGy" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="0E9-X8-hMG"/>
                             <constraint firstItem="oLQ-Br-JGy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="244" id="1XF-ms-NPo"/>
-                            <constraint firstItem="eod-3L-5Ie" firstAttribute="top" secondItem="oLQ-Br-JGy" secondAttribute="bottom" constant="37" id="430-tq-vLb"/>
-                            <constraint firstItem="eod-3L-5Ie" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="191" id="MSE-56-RHj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fRt-vY-vRg" secondAttribute="bottom" constant="314" id="Ild-wX-vB5"/>
                             <constraint firstItem="fRt-vY-vRg" firstAttribute="top" secondItem="D65-MU-IDY" secondAttribute="bottom" constant="47" id="Zb0-xh-orb"/>
-                            <constraint firstItem="D65-MU-IDY" firstAttribute="top" secondItem="eod-3L-5Ie" secondAttribute="bottom" constant="50" id="l13-mB-STW"/>
+                            <constraint firstItem="mxV-aa-EuM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Zig-R6-03W"/>
+                            <constraint firstItem="mxV-aa-EuM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="cNA-sN-UzB"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mxV-aa-EuM" secondAttribute="trailing" id="miT-KC-Syt"/>
                             <constraint firstItem="D65-MU-IDY" firstAttribute="centerX" secondItem="fRt-vY-vRg" secondAttribute="centerX" id="roM-pg-H8z"/>
                             <constraint firstItem="D65-MU-IDY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vS9-BD-8Ms"/>
+                            <constraint firstAttribute="bottom" secondItem="mxV-aa-EuM" secondAttribute="bottom" id="xHl-hK-S8Q"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="activityIndicator" destination="eod-3L-5Ie" id="uZF-A6-4TO"/>
                         <outlet property="loginWithFB" destination="fRt-vY-vRg" id="d5l-KK-cUV"/>
                         <outlet property="loginWithGoogle" destination="D65-MU-IDY" id="PoZ-9q-inW"/>
                         <segue destination="hzT-Vz-3e3" kind="showDetail" identifier="showChat" id="6if-wQ-uQO"/>
@@ -127,7 +128,13 @@
                         <viewLayoutGuide key="safeArea" id="jmN-YQ-cR2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Messages" id="AY1-9b-qcK"/>
+                    <navigationItem key="navigationItem" title="Messages" id="AY1-9b-qcK">
+                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="ezO-ss-8lo">
+                            <connections>
+                                <segue destination="crF-Un-a3i" kind="show" id="EIV-iN-1Wx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qhe-G1-lfq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -148,6 +155,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wKH-fm-cA2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="26v-AL-Z9X" firstAttribute="leading" secondItem="wKH-fm-cA2" secondAttribute="leading" id="94V-5j-LRw"/>
                             <constraint firstItem="wKH-fm-cA2" firstAttribute="bottom" secondItem="26v-AL-Z9X" secondAttribute="bottom" id="Gct-kQ-oDw"/>
@@ -165,7 +173,11 @@
             <point key="canvasLocation" x="1383" y="1123"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="EIV-iN-1Wx"/>
+    </inferredMetricsTieBreakers>
     <resources>
+        <image name="1" width="5041" height="7113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

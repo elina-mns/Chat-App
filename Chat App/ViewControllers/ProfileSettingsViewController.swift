@@ -14,7 +14,10 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
     
     @IBOutlet var tableView: UITableView!
     
-    let data = ["Log Out"]
+    enum ProfileSection: Int, CaseIterable {
+        case profilePicture,
+             logOut
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,18 +27,33 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data.count
+        ProfileSection.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = data[indexPath.row]
-        cell.textLabel?.textAlignment = .center
+        switch ProfileSection.allCases[indexPath.row] {
+        case .profilePicture:
+            cell.textLabel?.text = "Profile picture or info"
+        case .logOut:
+            cell.textLabel?.text = "Log out"
+            cell.textLabel?.textAlignment = .center
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        switch ProfileSection.allCases[indexPath.row] {
+        case .profilePicture:
+            print("tap on profile picture")
+        case .logOut:
+            logOut()
+        }
+    }
+    
+    private func logOut() {
         showAlert(title: "Log out", message: "Are you sure you would like to log out?") {
             //Facebook log out
             FBSDKLoginKit.LoginManager().logOut()
@@ -52,6 +70,5 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 print("Failed to log out")
             }
         }
-        
     }
 }
