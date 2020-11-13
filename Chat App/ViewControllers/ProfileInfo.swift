@@ -13,12 +13,7 @@ struct ProfileInfo {
     let email: String
     let id: String
     
-    public var changedEmail: String {
-        var changedEmail = email.replacingOccurrences(of: ".", with: "-")
-        changedEmail = changedEmail.replacingOccurrences(of: ".", with: "-")
-        return changedEmail
-    }
     public var profilePicFileName: String {
-        return "\(changedEmail)_profile_pic.png"
+        return "\(id)_profile_pic.png"
     }
 }

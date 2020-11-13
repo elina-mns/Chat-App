@@ -17,11 +17,6 @@ class DatabaseManager {
     static let shared = DatabaseManager()
     let dataBase = Database.database().reference()
     
-    static func changedEmail(email: String) -> String {
-        var changedEmail = email.replacingOccurrences(of: ".", with: "-")
-        changedEmail = changedEmail.replacingOccurrences(of: "@", with: "-")
-        return changedEmail
-    }
     
     func addUser(user: ProfileInfo, completion: @escaping (Bool) -> Void) {
         dataBase.child(user.id).setValue([
@@ -45,14 +40,14 @@ class DatabaseManager {
         }
     }
     
-    func allMessages(completion: @escaping (Result<[Message], Error>) -> Void) {
-        //get everything from the folder messages that we placed before
+    func receiveAllMessages(completion: @escaping (Result<[Message], Error>) -> Void) {
+        //get everything from the folder "messages" that we placed previously
         dataBase.child("test/messages").observe(.value) { (snapshot) in
             guard let value = snapshot.value as? [String: Any] else {
                 completion(.failure(DatabaseError.failedToFetch))
                 return
             }
-            //trasform each element of array Dictionary to Message array
+            //trasform each element of array of Dictionary to Message array
             let messages: [Message] = value.keys.compactMap({ key in
                 guard let dictionary = value[key] as? [String: Any],
                       let senderDict = dictionary["sender"] as? [String: String],

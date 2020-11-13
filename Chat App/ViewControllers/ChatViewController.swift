@@ -26,13 +26,13 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
     var messages = [Message]()
     lazy var sender: Sender? = {
         guard let userId = UserDefaults.standard.value(forKey: "user_id") as? String,
-              let displayName = UserDefaults.standard.value(forKey: "display_name") as? String else {
-              //let photoURL = UserDefaults.standard.value(forKey: "profile_picture_url") as? String else {
+              let displayName = UserDefaults.standard.value(forKey: "display_name") as? String,
+              let photoURL = UserDefaults.standard.value(forKey: "profile_picture_url") as? String ?? "" else {
             return nil
         }
         return Sender(senderId: userId,
                       displayName: displayName,
-                      photoURL: "")
+                      photoURL: photoURL)
     }()
 
     var isLoggedIn: Bool?
@@ -100,7 +100,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
 //    }
     
     func listenMessages() {
-        DatabaseManager.shared.allMessages() { [weak self] result in
+        DatabaseManager.shared.receiveAllMessages() { [weak self] result in
             switch result {
             case .success(let messages):
                 print("success in getting messages: \(messages)")
