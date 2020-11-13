@@ -123,6 +123,8 @@ class LoginVC: UIViewController, LoginButtonDelegate {
                     return
                 }
                 print("Successfully signed in with facebook cred.")
+                UserDefaults.standard.set(userId, forKey: "user_id")
+                UserDefaults.standard.set("\(firstName) \(lastName)", forKey: "display_name")
                 NotificationCenter.default.post(name: .didLogInNotification, object: nil)
             }
         })

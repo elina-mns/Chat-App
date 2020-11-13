@@ -35,6 +35,7 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
         switch ProfileSection.allCases[indexPath.row] {
         case .profilePicture:
             cell.textLabel?.text = "Profile picture or info"
+            cell.textLabel?.textAlignment = .center
         case .logOut:
             cell.textLabel?.text = "Log out"
             cell.textLabel?.textAlignment = .center
