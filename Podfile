@@ -16,7 +16,7 @@ pod 'MessageKit'
 pod 'JGProgressHUD'
 pod 'RealmSwift'
 pod 'SDWebImage'
-
+pod 'Giphy'
 
 
 target 'Chat App' do

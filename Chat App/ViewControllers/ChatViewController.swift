@@ -13,7 +13,11 @@ import JGProgressHUD
 import MessageKit
 import InputBarAccessoryView
 
+
 class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, InputBarAccessoryViewDelegate {
+    
+    let APIkey = "2ETzPkxoPDUwIIgs1Vt465sBAvQeuiZK"   //API key for gifs
+    
     
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -48,8 +52,6 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
     }()
     
     let activityIndicator = JGProgressHUD(style: .light)
-    
-    let APIkey = "2ETzPkxoPDUwIIgs1Vt465sBAvQeuiZK"   //API key for gifs
     
     private var messageListener: ListenerRegistration?
     
