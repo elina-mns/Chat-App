@@ -29,6 +29,7 @@
 		31EC2BD92554A8D700DCC091 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EC2BD82554A8D700DCC091 /* ProfileInfo.swift */; };
 		31F5D70C255E293C00E5BF11 /* Encodable+dict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5D70B255E293C00E5BF11 /* Encodable+dict.swift */; };
 		31F5D713255E33FB00E5BF11 /* UICollectionView+botton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5D712255E33FB00E5BF11 /* UICollectionView+botton.swift */; };
+		31F5D71B255F2C9200E5BF11 /* ToHideKeyboardWithTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5D71A255F2C9200E5BF11 /* ToHideKeyboardWithTap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		31EC2BD82554A8D700DCC091 /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
 		31F5D70B255E293C00E5BF11 /* Encodable+dict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+dict.swift"; sourceTree = "<group>"; };
 		31F5D712255E33FB00E5BF11 /* UICollectionView+botton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+botton.swift"; sourceTree = "<group>"; };
+		31F5D71A255F2C9200E5BF11 /* ToHideKeyboardWithTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToHideKeyboardWithTap.swift; path = "Chat App/ToHideKeyboardWithTap.swift"; sourceTree = SOURCE_ROOT; };
 		78C375B4FD6C2B44CA368934 /* Pods-Chat App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat App.debug.xcconfig"; path = "Target Support Files/Pods-Chat App/Pods-Chat App.debug.xcconfig"; sourceTree = "<group>"; };
 		827C9734695926601A7187F6 /* Pods-Chat App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat App.release.xcconfig"; path = "Target Support Files/Pods-Chat App/Pods-Chat App.release.xcconfig"; sourceTree = "<group>"; };
 		A7E990B30778D21DCC6CD873 /* Pods_Chat_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chat_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,6 +210,7 @@
 		31F5D711255E33E000E5BF11 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				31F5D71A255F2C9200E5BF11 /* ToHideKeyboardWithTap.swift */,
 				31F5D70B255E293C00E5BF11 /* Encodable+dict.swift */,
 				31F5D712255E33FB00E5BF11 /* UICollectionView+botton.swift */,
 			);
@@ -428,6 +431,7 @@
 				3100A454255356C700EB31EA /* Chat_App.xcdatamodeld in Sources */,
 				3110456E2559DC0C000089BE /* NotificationNameExt.swift in Sources */,
 				3100A44A255356C700EB31EA /* AppDelegate.swift in Sources */,
+				31F5D71B255F2C9200E5BF11 /* ToHideKeyboardWithTap.swift in Sources */,
 				316D90F1255466D1007D2632 /* ShowFailureAlertExt.swift in Sources */,
 				31EC2BD92554A8D700DCC091 /* ProfileInfo.swift in Sources */,
 				3100A44C255356C700EB31EA /* SceneDelegate.swift in Sources */,

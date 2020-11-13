@@ -87,6 +87,7 @@
         <!--Messages-->
         <scene sceneID="M5P-iO-EjL">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vl9-Y5-0bv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="ObK-jk-4S3" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Messages" id="8Pe-Kg-zgf"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="YyY-Se-xaj">
@@ -97,13 +98,13 @@
                         <segue destination="0TQ-aF-0YY" kind="relationship" relationship="rootViewController" id="fZV-Nj-aLj"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vl9-Y5-0bv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="228" y="357"/>
         </scene>
         <!--Profile Settings-->
         <scene sceneID="sdO-eM-JXn">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zkp-6H-RPF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="k8I-ex-Dd6" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile Settings" id="dLI-A9-QnI"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="q2L-9A-9Dv">
@@ -114,7 +115,6 @@
                         <segue destination="crF-Un-a3i" kind="relationship" relationship="rootViewController" id="3Zu-G5-E9v"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zkp-6H-RPF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1403" y="357"/>
         </scene>
@@ -135,6 +135,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qhe-G1-lfq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

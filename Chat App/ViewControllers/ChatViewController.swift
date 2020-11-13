@@ -60,6 +60,12 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
+        initializeHideKeyboard()
+        
+        let background = UIImageView();
+        background.image = UIImage(named: "1");
+        background.contentMode = .scaleToFill
+        self.messagesCollectionView.backgroundView = background
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,26 +84,6 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
             dismiss(animated: true, completion: nil)
         }
     }
-    
-//    private func insertNewMessage(_ message: Message) {
-//        guard !messages.contains(message) else {
-//            return
-//        }
-//
-//        messages.append(message)
-//        messages.sort()
-//
-//        let isLatestMessage = messages.firstIndex(of: message) == (messages.count - 1)
-//        let shouldScrollToBottom = messagesCollectionView.isAtBottom && isLatestMessage
-//
-//        messagesCollectionView.reloadData()
-//
-//        if shouldScrollToBottom {
-//            DispatchQueue.main.async {
-//                self.messagesCollectionView.scrollToBottom(animated: true)
-//            }
-//        }
-//    }
     
     func listenMessages() {
         DatabaseManager.shared.receiveAllMessages() { [weak self] result in
@@ -151,7 +137,6 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
       // 3
       return 0
     }
-
 }
 
 
@@ -218,15 +203,11 @@ extension ChatViewController {
     
     func backgroundColor(for message: MessageType, at indexPath: IndexPath,
                          in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        
-        // 1
-        return isFromCurrentSender(message: message) ? .blue : .red
+        return isFromCurrentSender(message: message) ? .darkGray : .lightGray
     }
     
     func shouldDisplayHeader(for message: MessageType, at indexPath: IndexPath,
                              in messagesCollectionView: MessagesCollectionView) -> Bool {
-        
-        // 2
         return false
     }
     
@@ -234,8 +215,6 @@ extension ChatViewController {
                       in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
         
         let corner: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
-        
-        // 3
         return .bubbleTail(corner, .curved)
     }
 }

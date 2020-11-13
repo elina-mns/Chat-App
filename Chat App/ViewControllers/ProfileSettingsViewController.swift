@@ -25,6 +25,11 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableHeaderView = createTableHeader()
+        
+        let background = UIImageView();
+        background.image = UIImage(named: "1");
+        background.contentMode = .scaleToFill
+        self.tableView.backgroundView = background
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
