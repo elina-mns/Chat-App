@@ -1,4 +1,4 @@
-<img src="https://github.com/elina-mns/Chat-App/blob/main/Chat%20App/Assets.xcassets/AppIcon.appiconset/196.png"
+<img src="https://github.com/elina-mns/Chat-App/blob/main/Chat%20App/Assets.xcassets/AppIcon.appiconset/256.png"
 align="right"/>
 # Chat-App
 
