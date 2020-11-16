@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -87,7 +87,6 @@
         <!--Messages-->
         <scene sceneID="M5P-iO-EjL">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vl9-Y5-0bv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="ObK-jk-4S3" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Messages" id="8Pe-Kg-zgf"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="YyY-Se-xaj">
@@ -98,13 +97,13 @@
                         <segue destination="0TQ-aF-0YY" kind="relationship" relationship="rootViewController" id="fZV-Nj-aLj"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vl9-Y5-0bv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="228" y="357"/>
         </scene>
         <!--Profile Settings-->
         <scene sceneID="sdO-eM-JXn">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zkp-6H-RPF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="k8I-ex-Dd6" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile Settings" id="dLI-A9-QnI"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="q2L-9A-9Dv">
@@ -115,6 +114,7 @@
                         <segue destination="crF-Un-a3i" kind="relationship" relationship="rootViewController" id="3Zu-G5-E9v"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zkp-6H-RPF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1403" y="357"/>
         </scene>

@@ -16,7 +16,7 @@ import GiphyUISDK
 import GiphyCoreSDK
 
 
-class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, InputBarAccessoryViewDelegate, GiphyDelegate {
+class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, InputBarAccessoryViewDelegate {
     
     let giphy = GiphyViewController()
 
@@ -69,6 +69,16 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
         background.image = UIImage(named: "1");
         background.contentMode = .scaleToFill
         self.messagesCollectionView.backgroundView = background
+        
+        // a button for viewing a gif view controller
+        let button = InputBarButtonItem()
+        button.setSize(CGSize(width: 35, height: 35), animated: false)
+        button.setImage(UIImage(systemName: "paperclip"), for: .normal)
+        button.onTouchUpInside { [weak self] _ in
+            self?.gifButtonTapped()
+        }
+        messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
+        messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -140,18 +150,6 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
       // 3
       return 0
     }
-    
-    func didSelectMedia(giphyViewController: GiphyViewController, media: GPHMedia) {
-        giphy.delegate = self
-        giphy.mediaTypeConfig = [.gifs, .stickers, .recents]
-        giphy.rating = .ratedPG13
-        present(giphy, animated: true, completion: nil)
-    }
-    
-    func didDismiss(controller: GiphyViewController?) {
-        giphy.dismiss(animated: true, completion: nil)
-    }
-   
 }
 
 
@@ -194,7 +192,7 @@ extension ChatViewController {
         }
         
     }
-    
+        
     func cellTopLabelAttributedText(for message: MessageType,
                                     at indexPath: IndexPath) -> NSAttributedString? {
         
@@ -236,5 +234,33 @@ extension ChatViewController {
         
         let corner: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
         return .bubbleTail(corner, .curved)
+    }
+
+}
+
+// showing a GIF View Controller
+
+extension ChatViewController: GiphyDelegate {
+    
+    func didSelectMedia(giphyViewController: GiphyViewController, media: GPHMedia) {
+        giphy.delegate = self
+        giphy.mediaTypeConfig = [.gifs, .stickers, .recents]
+        giphy.rating = .ratedPG13
+        present(giphy, animated: true, completion: nil)
+    }
+    
+    func didDismiss(controller: GiphyViewController?) {
+        giphy.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func gifButtonTapped() {
+        let giphy = GiphyViewController()
+        GiphyViewController.trayHeightMultiplier = 0.7
+        giphy.shouldLocalizeSearch = true
+        giphy.delegate = self
+        giphy.dimBackground = true
+        giphy.modalPresentationStyle = .overCurrentContext
+   
+        present(giphy, animated: true, completion: nil)
     }
 }
