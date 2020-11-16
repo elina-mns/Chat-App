@@ -26,11 +26,13 @@
 		3168A9222554B21B00BEAEDC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3168A9212554B21B00BEAEDC /* GoogleService-Info.plist */; };
 		316D90F1255466D1007D2632 /* ShowFailureAlertExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316D90F0255466D1007D2632 /* ShowFailureAlertExt.swift */; };
 		316D90F625546A65007D2632 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316D90F525546A65007D2632 /* LoginRequest.swift */; };
+		3175BD7B2562EB4E0024FBB1 /* GiphyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175BD7A2562EB4E0024FBB1 /* GiphyAPI.swift */; };
+		3175BD802562F72A0024FBB1 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175BD7F2562F72A0024FBB1 /* Gif.swift */; };
+		3175BD8E256318580024FBB1 /* UIImageView+ImageDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175BD8D256318580024FBB1 /* UIImageView+ImageDownload.swift */; };
 		31EC2BD92554A8D700DCC091 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EC2BD82554A8D700DCC091 /* ProfileInfo.swift */; };
 		31F5D70C255E293C00E5BF11 /* Encodable+dict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5D70B255E293C00E5BF11 /* Encodable+dict.swift */; };
 		31F5D713255E33FB00E5BF11 /* UICollectionView+botton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5D712255E33FB00E5BF11 /* UICollectionView+botton.swift */; };
 		31F5D71B255F2C9200E5BF11 /* ToHideKeyboardWithTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5D71A255F2C9200E5BF11 /* ToHideKeyboardWithTap.swift */; };
-		31F5D756255F388F00E5BF11 /* GiphyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5D755255F388F00E5BF11 /* GiphyVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,11 +77,13 @@
 		3168A9212554B21B00BEAEDC /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		316D90F0255466D1007D2632 /* ShowFailureAlertExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFailureAlertExt.swift; sourceTree = "<group>"; };
 		316D90F525546A65007D2632 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		3175BD7A2562EB4E0024FBB1 /* GiphyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyAPI.swift; sourceTree = "<group>"; };
+		3175BD7F2562F72A0024FBB1 /* Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
+		3175BD8D256318580024FBB1 /* UIImageView+ImageDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+ImageDownload.swift"; sourceTree = "<group>"; };
 		31EC2BD82554A8D700DCC091 /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
 		31F5D70B255E293C00E5BF11 /* Encodable+dict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+dict.swift"; sourceTree = "<group>"; };
 		31F5D712255E33FB00E5BF11 /* UICollectionView+botton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+botton.swift"; sourceTree = "<group>"; };
 		31F5D71A255F2C9200E5BF11 /* ToHideKeyboardWithTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToHideKeyboardWithTap.swift; path = "Chat App/ToHideKeyboardWithTap.swift"; sourceTree = SOURCE_ROOT; };
-		31F5D755255F388F00E5BF11 /* GiphyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyVC.swift; sourceTree = "<group>"; };
 		78C375B4FD6C2B44CA368934 /* Pods-Chat App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat App.debug.xcconfig"; path = "Target Support Files/Pods-Chat App/Pods-Chat App.debug.xcconfig"; sourceTree = "<group>"; };
 		827C9734695926601A7187F6 /* Pods-Chat App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat App.release.xcconfig"; path = "Target Support Files/Pods-Chat App/Pods-Chat App.release.xcconfig"; sourceTree = "<group>"; };
 		A7E990B30778D21DCC6CD873 /* Pods_Chat_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chat_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +196,8 @@
 			isa = PBXGroup;
 			children = (
 				31556EF7255DA120009D3C09 /* ChatModel.swift */,
+				3175BD7A2562EB4E0024FBB1 /* GiphyAPI.swift */,
+				3175BD7F2562F72A0024FBB1 /* Gif.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -203,7 +209,6 @@
 				3110456D2559DC0C000089BE /* NotificationNameExt.swift */,
 				316D90F0255466D1007D2632 /* ShowFailureAlertExt.swift */,
 				3100A44D255356C700EB31EA /* ChatViewController.swift */,
-				31F5D755255F388F00E5BF11 /* GiphyVC.swift */,
 				31EC2BD82554A8D700DCC091 /* ProfileInfo.swift */,
 				3110455F2555F6C5000089BE /* ProfileSettingsViewController.swift */,
 			);
@@ -216,6 +221,7 @@
 				31F5D71A255F2C9200E5BF11 /* ToHideKeyboardWithTap.swift */,
 				31F5D70B255E293C00E5BF11 /* Encodable+dict.swift */,
 				31F5D712255E33FB00E5BF11 /* UICollectionView+botton.swift */,
+				3175BD8D256318580024FBB1 /* UIImageView+ImageDownload.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -436,14 +442,16 @@
 				3100A44A255356C700EB31EA /* AppDelegate.swift in Sources */,
 				31F5D71B255F2C9200E5BF11 /* ToHideKeyboardWithTap.swift in Sources */,
 				316D90F1255466D1007D2632 /* ShowFailureAlertExt.swift in Sources */,
+				3175BD802562F72A0024FBB1 /* Gif.swift in Sources */,
 				31EC2BD92554A8D700DCC091 /* ProfileInfo.swift in Sources */,
-				31F5D756255F388F00E5BF11 /* GiphyVC.swift in Sources */,
 				3100A44C255356C700EB31EA /* SceneDelegate.swift in Sources */,
 				311045602555F6C5000089BE /* ProfileSettingsViewController.swift in Sources */,
 				311045DE255AED8C000089BE /* StorageFirebase.swift in Sources */,
 				3100A48025535BB500EB31EA /* LoginVC.swift in Sources */,
 				316D90F625546A65007D2632 /* LoginRequest.swift in Sources */,
 				31556EF8255DA120009D3C09 /* ChatModel.swift in Sources */,
+				3175BD7B2562EB4E0024FBB1 /* GiphyAPI.swift in Sources */,
+				3175BD8E256318580024FBB1 /* UIImageView+ImageDownload.swift in Sources */,
 				311045502555E1FC000089BE /* DatabaseManager.swift in Sources */,
 				31F5D70C255E293C00E5BF11 /* Encodable+dict.swift in Sources */,
 				31F5D713255E33FB00E5BF11 /* UICollectionView+botton.swift in Sources */,

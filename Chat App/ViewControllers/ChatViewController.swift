@@ -12,13 +12,14 @@ import FirebaseAuth
 import JGProgressHUD
 import MessageKit
 import InputBarAccessoryView
+import GiphyUISDK
+import GiphyCoreSDK
 
 
-class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, InputBarAccessoryViewDelegate {
+class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, InputBarAccessoryViewDelegate, GiphyDelegate {
     
-    let APIkey = "2ETzPkxoPDUwIIgs1Vt465sBAvQeuiZK"   //API key for gifs
-    
-    
+    let giphy = GiphyViewController()
+
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
@@ -30,10 +31,10 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
     var messages = [Message]()
     lazy var sender: Sender? = {
         guard let userId = UserDefaults.standard.value(forKey: "user_id") as? String,
-              let displayName = UserDefaults.standard.value(forKey: "display_name") as? String,
-              let photoURL = UserDefaults.standard.value(forKey: "profile_picture_url") as? String ?? "" else {
+              let displayName = UserDefaults.standard.value(forKey: "display_name") as? String else {
             return nil
         }
+        let photoURL = UserDefaults.standard.value(forKey: "profile_picture_url") as? String ?? ""
         return Sender(senderId: userId,
                       displayName: displayName,
                       photoURL: photoURL)
@@ -139,6 +140,18 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
       // 3
       return 0
     }
+    
+    func didSelectMedia(giphyViewController: GiphyViewController, media: GPHMedia) {
+        giphy.delegate = self
+        giphy.mediaTypeConfig = [.gifs, .stickers, .recents]
+        giphy.rating = .ratedPG13
+        present(giphy, animated: true, completion: nil)
+    }
+    
+    func didDismiss(controller: GiphyViewController?) {
+        giphy.dismiss(animated: true, completion: nil)
+    }
+   
 }
 
 
@@ -203,6 +216,11 @@ extension ChatViewController {
 // MARK: - MessagesDisplayDelegate
 extension ChatViewController {
     
+    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        guard let urlString = (message.sender as? Sender)?.photoURL, let url = URL(string: urlString) else { return }
+        avatarView.loadFromURL(photoUrl: url)
+    }
+    
     func backgroundColor(for message: MessageType, at indexPath: IndexPath,
                          in messagesCollectionView: MessagesCollectionView) -> UIColor {
         return isFromCurrentSender(message: message) ? .darkGray : .lightGray
@@ -210,7 +228,7 @@ extension ChatViewController {
     
     func shouldDisplayHeader(for message: MessageType, at indexPath: IndexPath,
                              in messagesCollectionView: MessagesCollectionView) -> Bool {
-        return false
+        return true
     }
     
     func messageStyle(for message: MessageType, at indexPath: IndexPath,

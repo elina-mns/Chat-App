@@ -74,22 +74,6 @@ extension MessageKind {
             return content
         default:
             fatalError("Not implemented")
-//        case let .attributedText(content):
-//            return "attributed_text"
-//        case let .custom(data):
-//            return "custom"
-//        case let .photo(data):
-//            return "photo"
-//        case let .video(data):
-//            return "video"
-//        case let .location(data):
-//            return "location"
-//        case let .audio(data):
-//            return "audio"
-//        case let .contact(data):
-//            return "contact"
-//        case let .linkPreview(data):
-//            return "link"
         }
     }
     
