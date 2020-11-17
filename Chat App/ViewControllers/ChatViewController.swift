@@ -295,7 +295,6 @@ extension ChatViewController: GiphyDelegate {
     
     func addGifToChat(text: String? = nil, media: GPHMedia? = nil, user: ProfileInfo) {
         let indexPath = IndexPath(row: messages.count, section: 0)
-        //messages.append(Message(sender: Sender, messageId: "", sentDate: Date, kind: .custom(Gif)))
         UIView.animate(withDuration: 0, animations: { [weak self] in
             self?.messagesCollectionView.insertItems(at: [indexPath])
         })

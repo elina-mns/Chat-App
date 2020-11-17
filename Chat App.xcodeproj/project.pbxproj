@@ -26,7 +26,6 @@
 		3168A9222554B21B00BEAEDC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3168A9212554B21B00BEAEDC /* GoogleService-Info.plist */; };
 		316D90F1255466D1007D2632 /* ShowFailureAlertExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316D90F0255466D1007D2632 /* ShowFailureAlertExt.swift */; };
 		316D90F625546A65007D2632 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316D90F525546A65007D2632 /* LoginRequest.swift */; };
-		3175BD7B2562EB4E0024FBB1 /* GiphyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175BD7A2562EB4E0024FBB1 /* GiphyAPI.swift */; };
 		3175BD802562F72A0024FBB1 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175BD7F2562F72A0024FBB1 /* Gif.swift */; };
 		3175BD8E256318580024FBB1 /* UIImageView+ImageDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175BD8D256318580024FBB1 /* UIImageView+ImageDownload.swift */; };
 		3175BD94256361CA0024FBB1 /* GifCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175BD93256361CA0024FBB1 /* GifCollectionViewCell.swift */; };
@@ -78,7 +77,6 @@
 		3168A9212554B21B00BEAEDC /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		316D90F0255466D1007D2632 /* ShowFailureAlertExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFailureAlertExt.swift; sourceTree = "<group>"; };
 		316D90F525546A65007D2632 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
-		3175BD7A2562EB4E0024FBB1 /* GiphyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyAPI.swift; sourceTree = "<group>"; };
 		3175BD7F2562F72A0024FBB1 /* Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		3175BD8D256318580024FBB1 /* UIImageView+ImageDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+ImageDownload.swift"; sourceTree = "<group>"; };
 		3175BD93256361CA0024FBB1 /* GifCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -198,7 +196,6 @@
 			isa = PBXGroup;
 			children = (
 				31556EF7255DA120009D3C09 /* ChatModel.swift */,
-				3175BD7A2562EB4E0024FBB1 /* GiphyAPI.swift */,
 				3175BD7F2562F72A0024FBB1 /* Gif.swift */,
 			);
 			path = Models;
@@ -454,7 +451,6 @@
 				3100A48025535BB500EB31EA /* LoginVC.swift in Sources */,
 				316D90F625546A65007D2632 /* LoginRequest.swift in Sources */,
 				31556EF8255DA120009D3C09 /* ChatModel.swift in Sources */,
-				3175BD7B2562EB4E0024FBB1 /* GiphyAPI.swift in Sources */,
 				3175BD8E256318580024FBB1 /* UIImageView+ImageDownload.swift in Sources */,
 				311045502555E1FC000089BE /* DatabaseManager.swift in Sources */,
 				31F5D70C255E293C00E5BF11 /* Encodable+dict.swift in Sources */,

@@ -112,10 +112,7 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
             GIDSignIn.sharedInstance()?.signOut()
             do {
                 try FirebaseAuth.Auth.auth().signOut()
-                let vc = LoginVC()
-                let navigation = UINavigationController(rootViewController: vc)
-                navigation.modalPresentationStyle = .fullScreen
-                self.present(navigation, animated: true)
+                self.dismiss(animated: true, completion: nil)
             }
             catch {
                 print("Failed to log out")
