@@ -31,4 +31,4 @@ width=300, height=600,
 align="center"/>
 <img src="https://github.com/elina-mns/Chat-App/blob/main/Chat%20App/Assets.xcassets/1.imageset/Optimized-Log%20out.png"
 width=300, height=600,
-align="right"/>
+align="left"/>
