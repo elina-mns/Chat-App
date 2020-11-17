@@ -106,11 +106,13 @@ class LoginVC: UIViewController, LoginButtonDelegate {
                     let fileName = chatUser.profilePicFileName
                     StorageFirebase.shared.uploadProfilePicture(with: data, fileName: fileName, completion: {
                         result in
+                        self.activityIndicator.dismiss()
                         switch result {
                         case .success(let downloadURL):
                             UserDefaults.standard.set(downloadURL, forKey: "profile_picture_url")
                             print(downloadURL)
                         case .failure(let error):
+                            self.showAlert(title: "Error", message: error.localizedDescription, actionForOk: nil)
                             print(error)
                         }
                     })

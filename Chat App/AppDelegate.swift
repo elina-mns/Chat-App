@@ -11,10 +11,12 @@ import Firebase
 import GoogleSignIn
 import GiphyUISDK
 import GiphyCoreSDK
+import JGProgressHUD
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
+    let activityIndicator = JGProgressHUD(style: .light)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
@@ -50,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
               let lastName = user.profile.familyName else { return }
         
         let chatUser = ProfileInfo(firstName: firstName, lastName: lastName, email: email, id: user.userID)
-        
+        activityIndicator.show(in: getCurrentViewController()?.view ?? UIView())
         DatabaseManager.shared.addUser(user: chatUser, completion: { success in
             if success {
                 //check if we have an image from Google
@@ -63,12 +65,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                         let fileName = chatUser.profilePicFileName
                         StorageFirebase.shared.uploadProfilePicture(with: data, fileName: fileName, completion: {
                             result in
+                            self.activityIndicator.dismiss()
                             switch result {
                             case .success(let downloadURL):
                                 UserDefaults.standard.set(downloadURL, forKey: "profile_picture_url")
                                 print(downloadURL)
                             case .failure(let error):
                                 print(error)
+                                self.getCurrentViewController()?.showAlert(title: "Error", message: error.localizedDescription, actionForOk: nil)
                             }
                         })
                     }).resume()
@@ -119,5 +123,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    private func getCurrentViewController() -> UIViewController? {
+
+        // If the root view is a navigation controller, we can just return the visible ViewController
+        if let navigationController = getNavigationController() {
+
+            return navigationController.visibleViewController
+        }
+
+        // Otherwise, we must get the root UIViewController and iterate through presented views
+        if let rootController = UIApplication.shared.keyWindow?.rootViewController {
+
+            var currentController: UIViewController! = rootController
+
+            // Each ViewController keeps track of the view it has presented, so we
+            // can move from the head to the tail, which will always be the current view
+            while( currentController.presentedViewController != nil ) {
+
+                currentController = currentController.presentedViewController
+            }
+            return currentController
+        }
+        return nil
+    }
+    
+    private func getNavigationController() -> UINavigationController? {
+
+        if let navigationController = UIApplication.shared.keyWindow?.rootViewController  {
+
+            return navigationController as? UINavigationController
+        }
+        return nil
     }
 }

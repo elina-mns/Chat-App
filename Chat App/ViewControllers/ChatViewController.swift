@@ -117,6 +117,9 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
                     self?.messagesCollectionView.reloadDataAndKeepOffset()
                 }
             case .failure(let error):
+                self?.showAlert(title: "Error",
+                                message: "Problem with fetching new messages from server. Please try again later.",
+                                actionForOk: nil)
                 print("failed to get messages: \(error)")
             }
         }
@@ -209,9 +212,10 @@ extension ChatViewController {
             if success {
                 self.messageInputBar.inputTextView.text = nil
                 print("message was sent")
-            }
-            else {
-                print("failed to send")
+            } else {
+                self.showAlert(title: "Error",
+                               message: "Failed to send a message. Please try again later.",
+                               actionForOk: nil)
             }
         }
     }
