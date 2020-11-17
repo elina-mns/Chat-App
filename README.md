@@ -4,8 +4,14 @@ align="right"/>
 
 A chat app using Google or Facebook accounts. 
 
+## Steps to build the app
 
-## Steps to use an app
+Since the app uses Cocoapods, it is important to install pods in order to use it:
+1. Go to Project Folder using Terminal 
+2. Run `pod install`
+3. Open "Chat App.xcworkspace"
+
+## Steps to use the app
 
 1. Log In with a preferrable option: Google or Facebook
 2. Send a message
