@@ -29,6 +29,7 @@
 		3175BD7B2562EB4E0024FBB1 /* GiphyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175BD7A2562EB4E0024FBB1 /* GiphyAPI.swift */; };
 		3175BD802562F72A0024FBB1 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175BD7F2562F72A0024FBB1 /* Gif.swift */; };
 		3175BD8E256318580024FBB1 /* UIImageView+ImageDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175BD8D256318580024FBB1 /* UIImageView+ImageDownload.swift */; };
+		3175BD94256361CA0024FBB1 /* GifCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175BD93256361CA0024FBB1 /* GifCollectionViewCell.swift */; };
 		31EC2BD92554A8D700DCC091 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EC2BD82554A8D700DCC091 /* ProfileInfo.swift */; };
 		31F5D70C255E293C00E5BF11 /* Encodable+dict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5D70B255E293C00E5BF11 /* Encodable+dict.swift */; };
 		31F5D713255E33FB00E5BF11 /* UICollectionView+botton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5D712255E33FB00E5BF11 /* UICollectionView+botton.swift */; };
@@ -80,6 +81,7 @@
 		3175BD7A2562EB4E0024FBB1 /* GiphyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyAPI.swift; sourceTree = "<group>"; };
 		3175BD7F2562F72A0024FBB1 /* Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		3175BD8D256318580024FBB1 /* UIImageView+ImageDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+ImageDownload.swift"; sourceTree = "<group>"; };
+		3175BD93256361CA0024FBB1 /* GifCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCollectionViewCell.swift; sourceTree = "<group>"; };
 		31EC2BD82554A8D700DCC091 /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
 		31F5D70B255E293C00E5BF11 /* Encodable+dict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+dict.swift"; sourceTree = "<group>"; };
 		31F5D712255E33FB00E5BF11 /* UICollectionView+botton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+botton.swift"; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				3100A44D255356C700EB31EA /* ChatViewController.swift */,
 				31EC2BD82554A8D700DCC091 /* ProfileInfo.swift */,
 				3110455F2555F6C5000089BE /* ProfileSettingsViewController.swift */,
+				3175BD93256361CA0024FBB1 /* GifCollectionViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				3100A44C255356C700EB31EA /* SceneDelegate.swift in Sources */,
 				311045602555F6C5000089BE /* ProfileSettingsViewController.swift in Sources */,
 				311045DE255AED8C000089BE /* StorageFirebase.swift in Sources */,
+				3175BD94256361CA0024FBB1 /* GifCollectionViewCell.swift in Sources */,
 				3100A48025535BB500EB31EA /* LoginVC.swift in Sources */,
 				316D90F625546A65007D2632 /* LoginRequest.swift in Sources */,
 				31556EF8255DA120009D3C09 /* ChatModel.swift in Sources */,

@@ -19,6 +19,8 @@ import GiphyCoreSDK
 class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, InputBarAccessoryViewDelegate {
     
     let giphy = GiphyViewController()
+    
+    var selectedContentType: GPHContentType?
 
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -63,6 +65,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
+        messagesCollectionView.register(GifCollectionViewCell.self)
         initializeHideKeyboard()
         
         let background = UIImageView();
@@ -159,7 +162,6 @@ extension ChatViewController {
             return sender
         }
         fatalError("Email should be cached")
-        return Sender(senderId: "123", displayName: "", photoURL: "")
     }
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
@@ -171,6 +173,10 @@ extension ChatViewController {
     }
     
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+        sendTextMessage(text: text)
+    }
+    
+    func sendTextMessage(text: String) {
         guard !text.replacingOccurrences(of: " ", with: "").isEmpty,
             let messageId = putMessageId(),
             let sender = self.sender else {
@@ -181,6 +187,24 @@ extension ChatViewController {
                               messageId: messageId,
                               sentDate: Date(),
                               kind: .text(text))
+        sendMessage(message: message)
+    }
+    
+    func sendGifMessage(media: GPHMedia) {
+        guard let messageId = putMessageId(),
+            let sender = self.sender else {
+            return
+        }
+        let gifId = media.id
+        //Send a message
+        let message = Message(sender: sender,
+                              messageId: messageId,
+                              sentDate: Date(),
+                              kind: .custom(gifId))
+        sendMessage(message: message)
+    }
+    
+    func sendMessage(message: Message) {
         DatabaseManager.shared.sendMessage(message: message) { success in
             if success {
                 self.messageInputBar.inputTextView.text = nil
@@ -190,7 +214,6 @@ extension ChatViewController {
                 print("failed to send")
             }
         }
-        
     }
         
     func cellTopLabelAttributedText(for message: MessageType,
@@ -235,23 +258,21 @@ extension ChatViewController {
         let corner: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
         return .bubbleTail(corner, .curved)
     }
-
+    
+    func customCellSizeCalculator(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CellSizeCalculator {
+        return CustomMessageSizeCalculator(layout: messagesCollectionView.messagesCollectionViewFlowLayout)
+    }
+    
+    func customCell(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UICollectionViewCell {
+        let gifCell = messagesCollectionView.dequeueReusableCell(GifCollectionViewCell.self, for: indexPath)
+        gifCell.configure(with: message, at: indexPath, and: messagesCollectionView)
+        return gifCell
+    }
 }
 
 // showing a GIF View Controller
 
 extension ChatViewController: GiphyDelegate {
-    
-    func didSelectMedia(giphyViewController: GiphyViewController, media: GPHMedia) {
-        giphy.delegate = self
-        giphy.mediaTypeConfig = [.gifs, .stickers, .recents]
-        giphy.rating = .ratedPG13
-        present(giphy, animated: true, completion: nil)
-    }
-    
-    func didDismiss(controller: GiphyViewController?) {
-        giphy.dismiss(animated: true, completion: nil)
-    }
     
     @objc func gifButtonTapped() {
         let giphy = GiphyViewController()
@@ -262,5 +283,26 @@ extension ChatViewController: GiphyDelegate {
         giphy.modalPresentationStyle = .overCurrentContext
    
         present(giphy, animated: true, completion: nil)
+    }
+    
+    func didSelectMedia(giphyViewController: GiphyViewController, media: GPHMedia) {
+        self.selectedContentType = giphy.selectedContentType
+        dismiss(animated: true, completion: { [weak self] in
+            self?.sendGifMessage(media: media)
+        })
+        GPHCache.shared.clear()
+    }
+    
+    func addGifToChat(text: String? = nil, media: GPHMedia? = nil, user: ProfileInfo) {
+        let indexPath = IndexPath(row: messages.count, section: 0)
+        //messages.append(Message(sender: Sender, messageId: "", sentDate: Date, kind: .custom(Gif)))
+        UIView.animate(withDuration: 0, animations: { [weak self] in
+            self?.messagesCollectionView.insertItems(at: [indexPath])
+        })
+        messagesCollectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
+    }
+    
+    func didDismiss(controller: GiphyViewController?) {
+        giphy.dismiss(animated: true, completion: nil)
     }
 }

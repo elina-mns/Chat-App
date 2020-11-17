@@ -56,14 +56,33 @@ class DatabaseManager {
                       let photoURL = senderDict["photoURL"],
                       let messageId = dictionary["messageId"] as? String,
                       let kind = dictionary["kind"] as? [String: String],
-                      //let type = kind["type"] as? String,
+                      let type = kind["type"],
                       let content = kind["content"],
                       let dateNumber = dictionary["sentDate"] as? Double else {
                     return nil
                 }
                 let date = Date(timeIntervalSinceReferenceDate: dateNumber)
                 let sender = Sender(senderId: senderId, displayName: displayName, photoURL: photoURL)
-                let messageKind: MessageKind = .text(content)
+                var messageKind: MessageKind = .text(content)
+                switch type {
+                case "text":
+                    messageKind = .text(content)
+                case "photo":
+                    if let url = URL(string: content) {
+                        let mediaItem = Media(url: url, image: nil, size: CGSize(width: 70, height: 70))
+                        messageKind = .photo(mediaItem)
+                    }
+                case "video":
+                    if let url = URL(string: content) {
+                        let mediaItem = Media(url: url, image: nil, size: CGSize(width: 70, height: 70))
+                        messageKind = .video(mediaItem)
+                    }
+                // for gifs
+                case "custom":
+                    messageKind = .custom(content)
+                default:
+                    messageKind = .text(content)
+                }
                 return Message(sender: sender, messageId: messageId, sentDate: date, kind: messageKind)
             })
             completion(.success(messages))

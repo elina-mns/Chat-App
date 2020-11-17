@@ -72,6 +72,17 @@ extension MessageKind {
             return content
         case let .emoji(content):
             return content
+        case let .photo(content):
+            return content.url?.absoluteString ?? ""
+        case let .video(content):
+            return content.url?.absoluteString ?? ""
+        // for gifs
+        case let .custom(anyContent):
+            if let gifId = anyContent as? String {
+                return gifId
+            } else {
+                return ""
+            }
         default:
             fatalError("Not implemented")
         }
@@ -101,4 +112,11 @@ extension MessageKind {
             return "link"
         }
     }
+}
+
+struct Media: MediaItem {
+    var url: URL?
+    var image: UIImage?
+    var placeholderImage: UIImage = UIImage(named: "placeholder")!
+    var size: CGSize
 }

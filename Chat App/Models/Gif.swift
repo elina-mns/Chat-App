@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MessageKit
 
 struct Gif: Codable {
     let imageOriginalURL: String
@@ -23,10 +24,10 @@ struct Gif: Codable {
     }
 }
 
-struct image: Codable {
+struct Image: Codable {
     let images: Gif
 }
 
-struct data: Codable {
-    let data: image
+struct GifData: Codable {
+    let data: Image
 }
