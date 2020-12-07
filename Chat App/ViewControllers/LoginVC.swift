@@ -15,6 +15,8 @@ class LoginVC: UIViewController, LoginButtonDelegate {
 
     @IBOutlet weak var loginWithGoogle: GIDSignInButton!
     @IBOutlet weak var loginWithFB: FBLoginButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    
     let activityIndicator = JGProgressHUD(style: .light)
     
     var isLogginIn = false
@@ -34,6 +36,16 @@ class LoginVC: UIViewController, LoginButtonDelegate {
         loginWithFB.permissions = ["public_profile ", "email"]
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+        
+        titleLabel.text = ""
+        var characterIndex = 0
+        let titleText = "⚡️Chat App⚡️"
+        for letter in titleText {
+            Timer.scheduledTimer(withTimeInterval: 0.1 * Double(characterIndex), repeats: false) { (timer) in
+                self.titleLabel.text?.append(letter)
+            }
+            characterIndex += 1
+        }
     }
     
     deinit {

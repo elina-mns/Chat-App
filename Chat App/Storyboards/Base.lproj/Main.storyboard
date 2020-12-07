@@ -19,8 +19,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="mxV-aa-EuM">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLQ-Br-JGy">
-                                <rect key="frame" x="152.5" y="288" width="109.5" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚡️Chat App⚡️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLQ-Br-JGy">
+                                <rect key="frame" x="124.5" y="288" width="165.5" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -58,6 +58,7 @@
                     <connections>
                         <outlet property="loginWithFB" destination="fRt-vY-vRg" id="d5l-KK-cUV"/>
                         <outlet property="loginWithGoogle" destination="D65-MU-IDY" id="PoZ-9q-inW"/>
+                        <outlet property="titleLabel" destination="oLQ-Br-JGy" id="c0w-xg-TPW"/>
                         <segue destination="ObK-jk-4S3" kind="show" identifier="showChat" id="FRO-xZ-b21"/>
                     </connections>
                 </viewController>
