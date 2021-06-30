@@ -234,6 +234,8 @@ PODS:
     - FBSDKLoginKit/Login (= 7.1.1)
   - FBSDKLoginKit/Login (7.1.1):
     - FBSDKCoreKit (~> 7.1.1)
+  - Firebase (7.0.0):
+    - Firebase/Core (= 7.0.0)
   - Firebase/Auth (7.0.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 7.0.0)
@@ -451,6 +453,7 @@ PODS:
 
 DEPENDENCIES:
   - FBSDKLoginKit
+  - Firebase
   - Firebase/Core
   - Firebase/Database
   - Firebase/RemoteConfig
@@ -546,6 +549,6 @@ SPEC CHECKSUMS:
   RealmSwift: 43cf2e114baa9d17d34eb81e7d0def31f21cd444
   SDWebImage: b69257f4ab14e9b6a2ef53e910fdf914d8f757c1
 
-PODFILE CHECKSUM: 5f95ebb803d8d33db4884eb25079c1b3aac956fb
+PODFILE CHECKSUM: 7c2cc5b42740b507327dbf5196140377caf8221d
 
 COCOAPODS: 1.10.0

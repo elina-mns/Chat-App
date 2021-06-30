@@ -5,7 +5,7 @@ use_frameworks!
 platform :ios, '12.0'
 
 pod 'FBSDKLoginKit'
-pod 'Firebase/Storage'
+pod 'Firebase'
 pod 'Firebase/Core'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
