@@ -22,7 +22,6 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.register(UINib(nibName: "LogOutTableViewCell", bundle: nil), forCellReuseIdentifier: "LogOutTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.contentMode = .scaleToFill
@@ -39,23 +38,21 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         switch ProfileSection.allCases[indexPath.row] {
         case .profilePicture:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.textLabel?.text = UserDefaults.standard.value(forKey: "display_name") as? String
             cell.textLabel?.font = .boldSystemFont(ofSize: 20)
-            //cell.textLabel?.textAlignment = .center
+            cell.textLabel?.textAlignment = .center
             cell.backgroundColor = .clear
             cell.selectionStyle = .none
-            return cell
         case .logOut:
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: "LogOutTableViewCell",
-                for: indexPath) as! LogOutTableViewCell
-            cell.delegate = self
+            cell.textLabel?.text = "Log Out"
             cell.backgroundColor = .clear
-            return cell
+            cell.textLabel?.font = .systemFont(ofSize: 20, weight: .medium)
+            cell.textLabel?.textAlignment = .center
         }
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -65,10 +62,7 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.selectionStyle = .none
         case .logOut:
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: "LogOutTableViewCell",
-                for: indexPath) as! LogOutTableViewCell
-            cell.delegate = self
+            logOut()
         }
     }
     
@@ -129,11 +123,5 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 print("Failed to log out")
             }
         }
-    }
-}
-
-extension ProfileSettingsViewController: LogOutTableViewCellDelegate {
-    func logOutButtonPressed() {
-        logOut()
     }
 }

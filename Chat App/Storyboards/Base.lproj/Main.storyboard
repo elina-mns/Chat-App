@@ -145,7 +145,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1" width="5041" height="7113"/>
+        <image name="1" width="1815" height="1021"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

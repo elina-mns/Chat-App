@@ -29,8 +29,6 @@
 		3175BD802562F72A0024FBB1 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175BD7F2562F72A0024FBB1 /* Gif.swift */; };
 		3175BD8E256318580024FBB1 /* UIImageView+ImageDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175BD8D256318580024FBB1 /* UIImageView+ImageDownload.swift */; };
 		3175BD94256361CA0024FBB1 /* GifCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175BD93256361CA0024FBB1 /* GifCollectionViewCell.swift */; };
-		318573FA268D3031009F2A75 /* LogOutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318573F8268D3031009F2A75 /* LogOutTableViewCell.swift */; };
-		318573FB268D3031009F2A75 /* LogOutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318573F9268D3031009F2A75 /* LogOutTableViewCell.xib */; };
 		31EC2BD92554A8D700DCC091 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EC2BD82554A8D700DCC091 /* ProfileInfo.swift */; };
 		31F5D70C255E293C00E5BF11 /* Encodable+dict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5D70B255E293C00E5BF11 /* Encodable+dict.swift */; };
 		31F5D713255E33FB00E5BF11 /* UICollectionView+botton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5D712255E33FB00E5BF11 /* UICollectionView+botton.swift */; };
@@ -82,8 +80,6 @@
 		3175BD7F2562F72A0024FBB1 /* Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		3175BD8D256318580024FBB1 /* UIImageView+ImageDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+ImageDownload.swift"; sourceTree = "<group>"; };
 		3175BD93256361CA0024FBB1 /* GifCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCollectionViewCell.swift; sourceTree = "<group>"; };
-		318573F8268D3031009F2A75 /* LogOutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutTableViewCell.swift; sourceTree = "<group>"; };
-		318573F9268D3031009F2A75 /* LogOutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogOutTableViewCell.xib; sourceTree = "<group>"; };
 		31EC2BD82554A8D700DCC091 /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
 		31F5D70B255E293C00E5BF11 /* Encodable+dict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+dict.swift"; sourceTree = "<group>"; };
 		31F5D712255E33FB00E5BF11 /* UICollectionView+botton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+botton.swift"; sourceTree = "<group>"; };
@@ -215,8 +211,6 @@
 				31EC2BD82554A8D700DCC091 /* ProfileInfo.swift */,
 				3110455F2555F6C5000089BE /* ProfileSettingsViewController.swift */,
 				3175BD93256361CA0024FBB1 /* GifCollectionViewCell.swift */,
-				318573F8268D3031009F2A75 /* LogOutTableViewCell.swift */,
-				318573F9268D3031009F2A75 /* LogOutTableViewCell.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -356,7 +350,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3100A459255356C900EB31EA /* LaunchScreen.storyboard in Resources */,
-				318573FB268D3031009F2A75 /* LogOutTableViewCell.xib in Resources */,
 				3168A9222554B21B00BEAEDC /* GoogleService-Info.plist in Resources */,
 				3100A456255356C900EB31EA /* Assets.xcassets in Resources */,
 				3100A451255356C700EB31EA /* Main.storyboard in Resources */,
@@ -448,7 +441,6 @@
 				3110456E2559DC0C000089BE /* NotificationNameExt.swift in Sources */,
 				3100A44A255356C700EB31EA /* AppDelegate.swift in Sources */,
 				31F5D71B255F2C9200E5BF11 /* ToHideKeyboardWithTap.swift in Sources */,
-				318573FA268D3031009F2A75 /* LogOutTableViewCell.swift in Sources */,
 				316D90F1255466D1007D2632 /* ShowFailureAlertExt.swift in Sources */,
 				3175BD802562F72A0024FBB1 /* Gif.swift in Sources */,
 				31EC2BD92554A8D700DCC091 /* ProfileInfo.swift in Sources */,
