@@ -29,12 +29,12 @@ Since the app uses Cocoapods, it is important to install pods in order to use it
 * Authenticating a user using Facebook and Google Sign in
 * Views with login, chat view, profile settings view with a button to `Log Out`
 
-<img src="https://github.com/elina-mns/Chat-App/blob/main/Chat%20App/Assets.xcassets/1.imageset/Optimized-Log%20in.png"
+<img src="https://github.com/elina-mns/Chat-App/blob/main/Chat%20App/readMe%20files/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202021-07-02%20at%2013.31.23.png"
 width=300, height=600,
 align="left"/>
-<img src="https://github.com/elina-mns/Chat-App/blob/main/Chat%20App/Assets.xcassets/1.imageset/Optimized-Chat%20view.png"
+<img src="https://github.com/elina-mns/Chat-App/blob/main/Chat%20App/readMe%20files/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202021-07-02%20at%2013.45.07.png"
 width=300, height=600,
 align="center"/>
-<img src="https://github.com/elina-mns/Chat-App/blob/main/Chat%20App/Assets.xcassets/1.imageset/Optimized-Log%20out.png"
+<img src="https://github.com/elina-mns/Chat-App/blob/main/Chat%20App/readMe%20files/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202021-07-02%20at%2013.45.24.png"
 width=300, height=600,
 align="left"/>
