@@ -25,7 +25,7 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
         tableView.register(UINib(nibName: "LogOutTableViewCell", bundle: nil), forCellReuseIdentifier: "LogOutTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.contentMode = .center
+        tableView.contentMode = .scaleToFill
         tableView.tableHeaderView = createTableHeader()
         
         let background = UIImageView();

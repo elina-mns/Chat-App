@@ -72,15 +72,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
         background.contentMode = .scaleToFill
         self.messagesCollectionView.backgroundView = background
         
-        // a button for viewing a gif view controller
-        let button = InputBarButtonItem()
-        button.setSize(CGSize(width: 35, height: 35), animated: false)
-        button.setImage(UIImage(systemName: "paperclip"), for: .normal)
-        button.onTouchUpInside { [weak self] _ in
-            self?.gifButtonTapped()
-        }
-        messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
-        messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
+        configureMessageBarView()
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "", style: .plain, target: nil, action: nil)
     }
@@ -94,6 +86,23 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         messageInputBar.inputTextView.becomeFirstResponder()
+    }
+    
+    func configureMessageBarView() {
+        // a button for viewing a gif view controller
+        let button = InputBarButtonItem()
+        //button.setSize(CGSize(width: 35, height: 35), animated: false)
+        button.setImage(UIImage(systemName: "paperclip"), for: .normal)
+        button.tintColor = .purple
+        button.onTouchUpInside { [weak self] _ in
+            self?.gifButtonTapped()
+        }
+        messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
+        messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
+        messageInputBar.inputTextView.placeholderLabel.text = " Message..."
+        messageInputBar.setRightStackViewWidthConstant(to: 100, animated: false)
+        messageInputBar.rightStackView.alignment = .center
+        messageInputBar.rightStackView.isLayoutMarginsRelativeArrangement = true
     }
 
     func confirmAuth() {
@@ -161,6 +170,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
 
 
 extension ChatViewController {
+    
     func currentSender() -> SenderType {
         if let sender = sender {
             return sender
@@ -240,6 +250,7 @@ extension ChatViewController {
 }
 
 // MARK: - MessagesDisplayDelegate
+
 extension ChatViewController {
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
@@ -275,7 +286,7 @@ extension ChatViewController {
     }
 }
 
-// showing a GIF View Controller
+// MARK: - Show a GIF View Controller
 
 extension ChatViewController: GiphyDelegate {
     
