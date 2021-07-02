@@ -40,4 +40,4 @@ width=300, height=600,
 align="left"/>
 <img src="https://github.com/elina-mns/Chat-App/blob/main/Chat%20App/readMe%20files/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202021-07-02%20at%2013.45.33.png"
 width=300, height=600,
-align="right"/>
+align="center"/>
