@@ -13,7 +13,6 @@ import JGProgressHUD
 import MessageKit
 import InputBarAccessoryView
 import GiphyUISDK
-import GiphyCoreSDK
 
 
 class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, InputBarAccessoryViewDelegate {
@@ -82,6 +81,8 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
         }
         messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
         messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "", style: .plain, target: nil, action: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {

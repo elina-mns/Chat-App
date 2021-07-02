@@ -22,8 +22,10 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UINib(nibName: "LogOutTableViewCell", bundle: nil), forCellReuseIdentifier: "LogOutTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.contentMode = .center
         tableView.tableHeaderView = createTableHeader()
         
         let background = UIImageView();
@@ -37,26 +39,36 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         switch ProfileSection.allCases[indexPath.row] {
         case .profilePicture:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.textLabel?.text = UserDefaults.standard.value(forKey: "display_name") as? String
-            cell.textLabel?.textAlignment = .center
+            cell.textLabel?.font = .boldSystemFont(ofSize: 20)
+            //cell.textLabel?.textAlignment = .center
+            cell.backgroundColor = .clear
+            cell.selectionStyle = .none
+            return cell
         case .logOut:
-            cell.textLabel?.text = "Log out"
-            cell.textLabel?.textAlignment = .center
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "LogOutTableViewCell",
+                for: indexPath) as! LogOutTableViewCell
+            cell.delegate = self
+            cell.backgroundColor = .clear
+            return cell
         }
-        
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch ProfileSection.allCases[indexPath.row] {
         case .profilePicture:
-            print("")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            cell.selectionStyle = .none
         case .logOut:
-            logOut()
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "LogOutTableViewCell",
+                for: indexPath) as! LogOutTableViewCell
+            cell.delegate = self
         }
     }
     
@@ -65,7 +77,6 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
               let profilePictureURL = URL(string: profilePictureURLString) else {
             return nil
         }
-        
         
         let view = UIView(frame: CGRect(x: 0,
                                               y: 0,
@@ -118,5 +129,11 @@ class ProfileSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 print("Failed to log out")
             }
         }
+    }
+}
+
+extension ProfileSettingsViewController: LogOutTableViewCellDelegate {
+    func logOutButtonPressed() {
+        logOut()
     }
 }

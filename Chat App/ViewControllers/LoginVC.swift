@@ -34,6 +34,7 @@ class LoginVC: UIViewController, LoginButtonDelegate {
         })
         loginWithFB.delegate = self
         loginWithFB.permissions = ["public_profile ", "email"]
+        loginWithFB.sizeThatFits(CGSize(width: 50, height: 50))
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         

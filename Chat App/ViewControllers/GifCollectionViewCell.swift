@@ -8,7 +8,6 @@
 import UIKit
 import MessageKit
 import GiphyUISDK
-import GiphyCoreSDK
 
 open class GifCollectionViewCell: MessageContentCell {
     

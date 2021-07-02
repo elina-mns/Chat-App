@@ -10,7 +10,6 @@ import CoreData
 import Firebase
 import GoogleSignIn
 import GiphyUISDK
-import GiphyCoreSDK
 import JGProgressHUD
 
 @main
