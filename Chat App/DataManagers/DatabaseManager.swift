@@ -18,6 +18,12 @@ class DatabaseManager {
     let dataBase = Database.database().reference()
     
     
+    static func safeEmail(emailAddress: String) -> String {
+        var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "-")
+        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+        return safeEmail
+    }
+    
     func addUser(user: ProfileInfo, completion: @escaping (Bool) -> Void) {
         dataBase.child(user.id).setValue([
             "first_name": user.firstName,
@@ -40,9 +46,73 @@ class DatabaseManager {
         }
     }
     
-    func receiveAllMessages(completion: @escaping (Result<[Message], Error>) -> Void) {
+    public func getAllConversationsList(for email: String, completion: @escaping (Result<[Conversation], Error>) -> Void) {
+        dataBase.child("\(email)/conversations").observe(.value, with: { snapshot in
+            guard let value = snapshot.value as? [[String: Any]] else{
+                completion(.failure(DatabaseError.failedToFetch))
+                return
+            }
+
+            let conversations: [Conversation] = value.compactMap({ dictionary in
+                guard let conversationId = dictionary["id"] as? String,
+                    let name = dictionary["name"] as? String,
+                    let otherUserEmail = dictionary["other_user_email"] as? String,
+                    let latestMessage = dictionary["latest_message"] as? [String: Any],
+                    let date = latestMessage["date"] as? String,
+                    let message = latestMessage["message"] as? String,
+                    let isRead = latestMessage["is_read"] as? Bool else {
+                        return nil
+                }
+
+                let lastMessageObject = LastMessage(date: date,
+                                                         text: message,
+                                                         isRead: isRead)
+                return Conversation(id: conversationId,
+                                    name: name,
+                                    otherUserEmail: otherUserEmail,
+                                    latestMessage: lastMessageObject)
+            })
+            completion(.success(conversations))
+        })
+    }
+    
+    public func conversationExists(iwth targetRecipientEmail: String, completion: @escaping (Result<String, Error>) -> Void) {
+        let safeRecipientEmail = DatabaseManager.safeEmail(emailAddress: targetRecipientEmail)
+        guard let senderEmail = UserDefaults.standard.value(forKey: "email") as? String else {
+            return
+        }
+        let safeSenderEmail = DatabaseManager.safeEmail(emailAddress: senderEmail)
+
+        dataBase.child("\(safeRecipientEmail)/conversations").observeSingleEvent(of: .value, with: { snapshot in
+            guard let collection = snapshot.value as? [[String: Any]] else {
+                completion(.failure(DatabaseError.failedToFetch))
+                return
+            }
+
+            // iterate and find conversation with target sender
+            if let conversation = collection.first(where: {
+                guard let targetSenderEmail = $0["other_user_email"] as? String else {
+                    return false
+                }
+                return safeSenderEmail == targetSenderEmail
+            }) {
+                // get id
+                guard let id = conversation["id"] as? String else {
+                    completion(.failure(DatabaseError.failedToFetch))
+                    return
+                }
+                completion(.success(id))
+                return
+            }
+
+            completion(.failure(DatabaseError.failedToFetch))
+            return
+        })
+    }
+    
+    func receiveAllMessages(withId id: String, completion: @escaping (Result<[Message], Error>) -> Void) {
         //get everything from the folder "messages" that we placed previously
-        dataBase.child("test/messages").observe(.value) { (snapshot) in
+        dataBase.child("\(id)/messages").observe(.value) { (snapshot) in
             guard let value = snapshot.value as? [String: Any] else {
                 completion(.failure(DatabaseError.failedToFetch))
                 return
@@ -88,4 +158,54 @@ class DatabaseManager {
             completion(.success(messages))
         }
     }
+    
+    /// Get all users from database
+    public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void) {
+        dataBase.child("users").observeSingleEvent(of: .value, with: { snapshot in
+            guard let value = snapshot.value as? [[String: String]] else {
+                completion(.failure(DatabaseError.failedToFetch))
+                return
+            }
+            completion(.success(value))
+        })
+    }
+
+    public func deleteConversation(conversationId: String, completion: @escaping (Bool) -> Void) {
+        guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
+            return
+        }
+        let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
+
+        print("Deleting conversation with id: \(conversationId)")
+
+        // Get all conversations for current user
+        // delete conversation in collection with target id
+        // reset those conversations for the user in database
+        let ref = dataBase.child("\(safeEmail)/conversations")
+        ref.observeSingleEvent(of: .value) { snapshot in
+            if var conversations = snapshot.value as? [[String: Any]] {
+                var positionToRemove = 0
+                for conversation in conversations {
+                    if let id = conversation["id"] as? String,
+                        id == conversationId {
+                        print("found conversation to delete")
+                        break
+                    }
+                    positionToRemove += 1
+                }
+
+                conversations.remove(at: positionToRemove)
+                ref.setValue(conversations, withCompletionBlock: { error, _  in
+                    guard error == nil else {
+                        completion(false)
+                        print("faield to write new conversatino array")
+                        return
+                    }
+                    print("deleted conversaiton")
+                    completion(true)
+                })
+            }
+        }
+    }
+
 }

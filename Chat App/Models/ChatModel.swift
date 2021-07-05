@@ -39,6 +39,14 @@ struct Message: MessageType, Encodable, Equatable, Comparable {
         lhs.sentDate < rhs.sentDate
     }
 }
+
+struct Conversation {
+    let id: String
+    let name: String
+    let otherUserEmail: String
+    let latestMessage: LastMessage
+}
+
  
 struct Sender: SenderType, Encodable {
     var senderId: String

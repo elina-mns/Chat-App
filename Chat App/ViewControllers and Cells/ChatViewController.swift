@@ -42,6 +42,9 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
     }()
 
     var isLoggedIn: Bool?
+    private var conversationId: String?
+    public let otherUserEmail: String
+    var isNewConversation = false
         
     let noChatsFound: UILabel = {
         let label = UILabel()
@@ -56,6 +59,16 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
     let activityIndicator = JGProgressHUD(style: .light)
     
     private var messageListener: ListenerRegistration?
+    
+    init(with email: String, id: String?) {
+        self.conversationId = id
+        self.otherUserEmail = email
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +93,9 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         confirmAuth()
-        listenMessages()
+        if let conversationId = conversationId {
+            listenMessages(id: conversationId)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -111,8 +126,8 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
         }
     }
     
-    func listenMessages() {
-        DatabaseManager.shared.receiveAllMessages() { [weak self] result in
+    func listenMessages(id: String) {
+        DatabaseManager.shared.receiveAllMessages(withId: id, completion: { [weak self] result in
             switch result {
             case .success(let messages):
                 print("success in getting messages: \(messages)")
@@ -132,7 +147,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
                                 actionForOk: nil)
                 print("failed to get messages: \(error)")
             }
-        }
+        })
     }
 
     

@@ -32,6 +32,8 @@
 		3195AB4B2693736B00B1E9A6 /* ListOfMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3195AB4A2693736B00B1E9A6 /* ListOfMessagesViewController.swift */; };
 		3195AB4E269376AC00B1E9A6 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3195AB4C269376AC00B1E9A6 /* MessageTableViewCell.swift */; };
 		3195AB4F269376AC00B1E9A6 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3195AB4D269376AC00B1E9A6 /* MessageTableViewCell.xib */; };
+		3195AB5126938C9500B1E9A6 /* NewConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3195AB5026938C9500B1E9A6 /* NewConversationVC.swift */; };
+		3195AB5326938CD600B1E9A6 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3195AB5226938CD600B1E9A6 /* SearchResult.swift */; };
 		31EC2BD92554A8D700DCC091 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EC2BD82554A8D700DCC091 /* ProfileInfo.swift */; };
 		31F5D70C255E293C00E5BF11 /* Encodable+dict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5D70B255E293C00E5BF11 /* Encodable+dict.swift */; };
 		31F5D713255E33FB00E5BF11 /* UICollectionView+botton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F5D712255E33FB00E5BF11 /* UICollectionView+botton.swift */; };
@@ -86,6 +88,8 @@
 		3195AB4A2693736B00B1E9A6 /* ListOfMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfMessagesViewController.swift; sourceTree = "<group>"; };
 		3195AB4C269376AC00B1E9A6 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		3195AB4D269376AC00B1E9A6 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
+		3195AB5026938C9500B1E9A6 /* NewConversationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationVC.swift; sourceTree = "<group>"; };
+		3195AB5226938CD600B1E9A6 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		31EC2BD82554A8D700DCC091 /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
 		31F5D70B255E293C00E5BF11 /* Encodable+dict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+dict.swift"; sourceTree = "<group>"; };
 		31F5D712255E33FB00E5BF11 /* UICollectionView+botton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+botton.swift"; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 			children = (
 				31556EF7255DA120009D3C09 /* ChatModel.swift */,
 				3175BD7F2562F72A0024FBB1 /* Gif.swift */,
+				3195AB5226938CD600B1E9A6 /* SearchResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -220,6 +225,7 @@
 				3195AB4A2693736B00B1E9A6 /* ListOfMessagesViewController.swift */,
 				3195AB4C269376AC00B1E9A6 /* MessageTableViewCell.swift */,
 				3195AB4D269376AC00B1E9A6 /* MessageTableViewCell.xib */,
+				3195AB5026938C9500B1E9A6 /* NewConversationVC.swift */,
 			);
 			path = "ViewControllers and Cells";
 			sourceTree = "<group>";
@@ -446,8 +452,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3195AB5326938CD600B1E9A6 /* SearchResult.swift in Sources */,
 				3100A44E255356C700EB31EA /* ChatViewController.swift in Sources */,
 				3100A454255356C700EB31EA /* Chat_App.xcdatamodeld in Sources */,
+				3195AB5126938C9500B1E9A6 /* NewConversationVC.swift in Sources */,
 				3110456E2559DC0C000089BE /* NotificationNameExt.swift in Sources */,
 				3100A44A255356C700EB31EA /* AppDelegate.swift in Sources */,
 				31F5D71B255F2C9200E5BF11 /* ToHideKeyboardWithTap.swift in Sources */,

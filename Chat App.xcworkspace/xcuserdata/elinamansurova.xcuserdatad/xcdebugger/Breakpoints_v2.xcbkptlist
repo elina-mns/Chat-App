@@ -62,9 +62,9 @@
             filePath = "Chat App/DataManagers/DatabaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "receiveAllMessages(completion:)"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "receiveAllMessages(withId:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -78,9 +78,9 @@
             filePath = "Chat App/DataManagers/DatabaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "receiveAllMessages(completion:)"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "receiveAllMessages(withId:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

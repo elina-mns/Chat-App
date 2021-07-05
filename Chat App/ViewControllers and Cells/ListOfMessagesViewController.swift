@@ -9,10 +9,10 @@ import UIKit
 import FirebaseAuth
 import JGProgressHUD
 
-/// Controller that shows list of conversations
+
 class ListOfMessagesViewController: UIViewController {
 
-    private var conversations = [Message]()
+    private var conversations = [Conversation]()
 
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -35,11 +35,15 @@ class ListOfMessagesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose,
-                                                            target: self,
-                                                            action: #selector(didTapComposeButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose,target: self, action: #selector(didTapComposeButton))
         view.addSubview(tableView)
         view.addSubview(noConversationsLabel)
+        
+        let background = UIImageView();
+        background.image = UIImage(named: "1");
+        background.contentMode = .scaleToFill
+        tableView.addSubview(background)
+        
         setupTableView()
         listenForMessages()
 
@@ -62,7 +66,7 @@ class ListOfMessagesViewController: UIViewController {
 
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
 
-        DatabaseManager.shared.getAllConversations(for: safeEmail, completion: { [weak self] result in
+        DatabaseManager.shared.getAllConversationsList(for: safeEmail, completion: { [weak self] result in
             switch result {
             case .success(let conversations):
                 print("successfully got conversation models")
@@ -87,7 +91,7 @@ class ListOfMessagesViewController: UIViewController {
     }
 
     @objc private func didTapComposeButton() {
-        let vc = NewConversationViewController()
+        let vc = NewConversationVC()
         vc.completion = { [weak self] result in
             guard let strongSelf = self else {
                 return
@@ -145,8 +149,8 @@ class ListOfMessagesViewController: UIViewController {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
         noConversationsLabel.frame = CGRect(x: 10,
-                                            y: (view.height - 100)/2,
-                                            width: view.width - 20,
+                                            y: (view.bounds.height - 100)/2,
+                                            width: view.bounds.width - 20,
                                             height: 100)
     }
 
@@ -171,7 +175,7 @@ class ListOfMessagesViewController: UIViewController {
 
 }
 
-extension ConversationsViewController: UITableViewDelegate, UITableViewDataSource {
+extension ListOfMessagesViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return conversations.count
@@ -179,8 +183,7 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = conversations[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: ConversationTableViewCell.identifier,
-                                                 for: indexPath) as! ConversationTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell",for: indexPath) as! MessageTableViewCell
         cell.configure(with: model)
         return cell
     }
@@ -191,8 +194,8 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
         openConversation(model)
     }
 
-    func openConversation(_ model: Message) {
-        let vc = ChatViewController(nibName: model.otherUserEmail, bundle: model.id)
+    func openConversation(_ model: Conversation) {
+        let vc = ChatViewController(with: model.otherUserEmail, id: model.id)
         vc.title = model.name
         navigationController?.pushViewController(vc, animated: true)
     }

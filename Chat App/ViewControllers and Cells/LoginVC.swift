@@ -30,14 +30,14 @@ class LoginVC: UIViewController, LoginButtonDelegate {
         super.viewDidLoad()
         observer = NotificationCenter.default.addObserver(forName: .didLogInNotification, object: nil, queue: .main, using: { [weak self] _ in
         guard self != nil else { return }
-            self?.performSegue(withIdentifier: "showChat", sender: self)
+            self?.showListOfMessagesVC()
         })
         loginWithFB.delegate = self
         loginWithFB.permissions = ["public_profile ", "email"]
         loginWithFB.sizeThatFits(CGSize(width: 50, height: 50))
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
-        
+    
         titleLabel.text = ""
         var characterIndex = 0
         let titleText = "⚡️Chat App⚡️"
@@ -58,13 +58,7 @@ class LoginVC: UIViewController, LoginButtonDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if AccessToken.current !=  nil {
-            self.performSegue(withIdentifier: "showChat", sender: self)
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showChat" {
-            segue.destination.modalPresentationStyle = .fullScreen
+            showListOfMessagesVC()
         }
     }
     
@@ -137,6 +131,7 @@ class LoginVC: UIViewController, LoginButtonDelegate {
                     print(error?.localizedDescription ?? "Invalid facebook cred")
                     return
                 }
+                self.showListOfMessagesVC()
                 print("Successfully signed in with facebook cred.")
                 UserDefaults.standard.set(userId, forKey: "user_id")
                 UserDefaults.standard.set("\(firstName) \(lastName)", forKey: "display_name")
@@ -147,5 +142,10 @@ class LoginVC: UIViewController, LoginButtonDelegate {
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
         
+    }
+    
+    func showListOfMessagesVC() {
+        let vc = ListOfMessagesViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
