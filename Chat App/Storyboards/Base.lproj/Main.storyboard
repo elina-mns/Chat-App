@@ -55,8 +55,15 @@
                             <constraint firstAttribute="bottom" secondItem="mxV-aa-EuM" secondAttribute="bottom" id="xHl-hK-S8Q"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="myo-Jz-SrT"/>
+                    <navigationItem key="navigationItem" id="myo-Jz-SrT">
+                        <barButtonItem key="rightBarButtonItem" image="arrow.forward" catalog="system" id="lCz-3S-gtq">
+                            <connections>
+                                <action selector="didTapGoToConvos:" destination="BYZ-38-t0r" id="kkW-Ud-Q6I"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="goToConvosButton" destination="lCz-3S-gtq" id="Xrd-wK-0Lo"/>
                         <outlet property="loginWithFB" destination="fRt-vY-vRg" id="d5l-KK-cUV"/>
                         <outlet property="loginWithGoogle" destination="D65-MU-IDY" id="PoZ-9q-inW"/>
                         <outlet property="titleLabel" destination="oLQ-Br-JGy" id="c0w-xg-TPW"/>
@@ -179,6 +186,7 @@
     </scenes>
     <resources>
         <image name="1" width="1815" height="1021"/>
+        <image name="arrow.forward" catalog="system" width="128" height="98"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -58,6 +58,13 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
         return label
     }()
     
+    var background: UIImageView = {
+        let background = UIImageView()
+        background.image = UIImage(named: "1")
+        background.contentMode = .scaleToFill
+        return background
+    }()
+    
     let activityIndicator = JGProgressHUD(style: .light)
     
     private var messageListener: ListenerRegistration?
@@ -83,12 +90,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
         messageInputBar.delegate = self
         messagesCollectionView.register(GifCollectionViewCell.self)
         initializeHideKeyboard()
-        
-        let background = UIImageView();
-        background.image = UIImage(named: "1");
-        background.contentMode = .scaleToFill
-        self.messagesCollectionView.backgroundView = background
-        
+        messagesCollectionView.backgroundView = background
         configureMessageBarView()
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "", style: .plain, target: nil, action: nil)
@@ -110,7 +112,6 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
     func configureMessageBarView() {
         // a button for viewing a gif view controller
         let button = InputBarButtonItem()
-        //button.setSize(CGSize(width: 35, height: 35), animated: false)
         button.setImage(UIImage(systemName: "paperclip"), for: .normal)
         button.tintColor = .purple
         button.onTouchUpInside { [weak self] _ in

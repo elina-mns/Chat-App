@@ -12,25 +12,35 @@ import GoogleSignIn
 import JGProgressHUD
 
 class LoginVC: UIViewController, LoginButtonDelegate {
+    
+    //MARK: Properties
 
     @IBOutlet weak var loginWithGoogle: GIDSignInButton!
     @IBOutlet weak var loginWithFB: FBLoginButton!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var goToConvosButton: UIBarButtonItem!
     
     let activityIndicator = JGProgressHUD(style: .light)
-    
     var isLogginIn = false
     var observer: NSObjectProtocol?
+    
+    //MARK: Actions
     
     @IBAction func didTapSignOut(_ sender: AnyObject) {
       GIDSignIn.sharedInstance().signOut()
     }
     
+    @IBAction func didTapGoToConvos(_ sender: Any) {
+        showListOfConversationsVC()
+    }
+    
+    //MARK: Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         observer = NotificationCenter.default.addObserver(forName: .didLogInNotification, object: nil, queue: .main, using: { [weak self] _ in
         guard self != nil else { return }
-            self?.showListOfMessagesVC()
+            self?.showListOfConversationsVC()
         })
         loginWithFB.delegate = self
         loginWithFB.permissions = ["public_profile ", "email"]
@@ -38,7 +48,6 @@ class LoginVC: UIViewController, LoginButtonDelegate {
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         navigationController?.navigationBar.tintColor = .purple
-    
         titleLabel.text = ""
         var characterIndex = 0
         let titleText = "⚡️Chat App⚡️"
@@ -56,12 +65,27 @@ class LoginVC: UIViewController, LoginButtonDelegate {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.title = "⚡️Chat App⚡️"
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if AccessToken.current != nil {
-            showListOfMessagesVC()
+            showListOfConversationsVC()
         }
+        goToConvosButton.isEnabled = true
+        goToConvosButton.tintColor = .purple
     }
+    
+    //MARK: Login
     
     func setLoggingIn(_ loggingIn: Bool) {
         loginWithGoogle.isEnabled = !loggingIn
@@ -83,7 +107,7 @@ class LoginVC: UIViewController, LoginButtonDelegate {
                                                          version: nil,
                                                          httpMethod: .get)
         
-        facebookRequest.start(completionHandler: { _, result, error in
+        facebookRequest.start(completion: { _, result, error in
             guard let result = result as? [String: Any],
                   error == nil else {
                 print("Failed to make facebook graph request")
@@ -132,7 +156,6 @@ class LoginVC: UIViewController, LoginButtonDelegate {
                     print(error?.localizedDescription ?? "Invalid facebook cred")
                     return
                 }
-                self.showListOfMessagesVC()
                 print("Successfully signed in with facebook cred.")
                 UserDefaults.standard.set(userId, forKey: "user_id")
                 UserDefaults.standard.set("\(firstName) \(lastName)", forKey: "display_name")
@@ -145,7 +168,9 @@ class LoginVC: UIViewController, LoginButtonDelegate {
         
     }
     
-    func showListOfMessagesVC() {
+    //MARK: Show List of Conversations
+    
+    @objc func showListOfConversationsVC() {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ListOfMessagesViewController") as! ListOfMessagesViewController
         self.navigationController?.pushViewController(resultViewController, animated: false)

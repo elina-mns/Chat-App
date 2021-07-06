@@ -9,17 +9,15 @@ import UIKit
 import JGProgressHUD
 
 class NewConversationVC: UIViewController {
+    
+    //MARK: Properties
 
     public var completion: ((SearchResult) -> (Void))?
-
     private let spinner = JGProgressHUD(style: .dark)
-
     private var users = [[String: String]]()
-
     private var results = [SearchResult]()
-
     private var hasFetched = false
-
+    
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "Search for Users..."
@@ -50,14 +48,20 @@ class NewConversationVC: UIViewController {
         return background
     }()
     
+    //MARK: Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let image = UIImage(named: "1") {
+            view.backgroundColor = UIColor(patternImage: image)
+        }
         view.addSubview(noResultsLabel)
         view.addSubview(tableView)
         tableView.backgroundView = background
         tableView.delegate = self
         tableView.dataSource = self
-
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
         searchBar.delegate = self
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.topItem?.titleView = searchBar
@@ -81,7 +85,6 @@ class NewConversationVC: UIViewController {
     @objc private func dismissSelf() {
         dismiss(animated: true, completion: nil)
     }
-
 }
 
        //MARK: Table view methods
@@ -122,19 +125,15 @@ extension NewConversationVC: UISearchBarDelegate {
         guard let text = searchBar.text, !text.replacingOccurrences(of: " ", with: "").isEmpty else {
             return
         }
-
         searchBar.resignFirstResponder()
-
         results.removeAll()
         spinner.show(in: view)
-
         searchUsers(query: text)
     }
 
     func searchUsers(query: String) {
         // check if array has firebase results
         if hasFetched {
-            // if it does: filter
             filterUsers(with: query)
         }
         else {
@@ -157,20 +156,16 @@ extension NewConversationVC: UISearchBarDelegate {
         guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String, hasFetched else {
             return
         }
-
         let safeEmail = DatabaseManager.safeEmail(emailAddress: currentUserEmail)
-
         self.spinner.dismiss()
 
         let results: [SearchResult] = users.filter({
             guard let email = $0["email"], email != safeEmail else {
                 return false
             }
-
             guard let name = $0["name"]?.lowercased() else {
                 return false
             }
-
             return name.hasPrefix(term.lowercased())
         }).compactMap({
 
@@ -178,12 +173,9 @@ extension NewConversationVC: UISearchBarDelegate {
                 let name = $0["name"] else {
                 return nil
             }
-
             return SearchResult(name: name, email: email)
         })
-
         self.results = results
-
         updateUI()
     }
 
@@ -191,12 +183,10 @@ extension NewConversationVC: UISearchBarDelegate {
         if results.isEmpty {
             noResultsLabel.isHidden = false
             tableView.isHidden = true
-        }
-        else {
+        } else {
             noResultsLabel.isHidden = true
             tableView.isHidden = false
             tableView.reloadData()
         }
     }
-
 }

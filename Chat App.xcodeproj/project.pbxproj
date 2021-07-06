@@ -216,8 +216,6 @@
 			isa = PBXGroup;
 			children = (
 				3100A47F25535BB500EB31EA /* LoginVC.swift */,
-				3110456D2559DC0C000089BE /* NotificationNameExt.swift */,
-				316D90F0255466D1007D2632 /* ShowFailureAlertExt.swift */,
 				3100A44D255356C700EB31EA /* ChatViewController.swift */,
 				31EC2BD82554A8D700DCC091 /* ProfileInfo.swift */,
 				3110455F2555F6C5000089BE /* ProfileSettingsViewController.swift */,
@@ -237,6 +235,8 @@
 				31F5D70B255E293C00E5BF11 /* Encodable+dict.swift */,
 				31F5D712255E33FB00E5BF11 /* UICollectionView+botton.swift */,
 				3175BD8D256318580024FBB1 /* UIImageView+ImageDownload.swift */,
+				3110456D2559DC0C000089BE /* NotificationNameExt.swift */,
+				316D90F0255466D1007D2632 /* ShowFailureAlertExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";

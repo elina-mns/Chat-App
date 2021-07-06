@@ -48,6 +48,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="lastMessage" destination="5yx-Dd-exu" id="UO7-49-H4b"/>
                 <outlet property="userImage" destination="15u-Fr-bHr" id="8cu-k2-vzd"/>

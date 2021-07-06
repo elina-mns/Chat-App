@@ -46,6 +46,9 @@ class ListOfMessagesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let image = UIImage(named: "1") {
+            view.backgroundColor = UIColor(patternImage: image)
+        }
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose,target: self, action: #selector(didTapComposeButton))
         view.addSubview(tableView)
         view.addSubview(noConversationsLabel)
