@@ -48,7 +48,7 @@ class DatabaseManager {
     
     public func getAllConversationsList(for email: String, completion: @escaping (Result<[Conversation], Error>) -> Void) {
         dataBase.child("\(email)/conversations").observe(.value, with: { snapshot in
-            guard let value = snapshot.value as? [[String: Any]] else{
+            guard let value = snapshot.value as? [[String: Any]] else {
                 completion(.failure(DatabaseError.failedToFetch))
                 return
             }

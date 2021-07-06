@@ -68,6 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                             switch result {
                             case .success(let downloadURL):
                                 UserDefaults.standard.set(downloadURL, forKey: "profile_picture_url")
+                                UserDefaults.standard.set(email, forKey: "email")
                                 print(downloadURL)
                             case .failure(let error):
                                 print(error)
@@ -89,6 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 print("Successfully signed in with Google cred.")
                 UserDefaults.standard.set(user.userID, forKey: "user_id")
                 UserDefaults.standard.set("\(firstName) \(lastName)", forKey: "display_name")
+                UserDefaults.standard.set(email, forKey: "email")
                 NotificationCenter.default.post(name: .didLogInNotification, object: nil)
             })
         })

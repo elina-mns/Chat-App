@@ -46,7 +46,7 @@ class ListOfMessagesViewController: UIViewController {
         let background = UIImageView();
         background.image = UIImage(named: "1");
         background.contentMode = .scaleToFill
-        tableView.addSubview(background)
+        view.addSubview(background)
         
         setupTableView()
         listenForMessages()
