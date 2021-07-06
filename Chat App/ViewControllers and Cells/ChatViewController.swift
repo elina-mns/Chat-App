@@ -167,22 +167,16 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
     
     func avatarSize(for message: MessageType, at indexPath: IndexPath,
       in messagesCollectionView: MessagesCollectionView) -> CGSize {
-
-      // 1
       return .zero
     }
 
     func footerViewSize(for message: MessageType, at indexPath: IndexPath,
       in messagesCollectionView: MessagesCollectionView) -> CGSize {
-
-      // 2
       return CGSize(width: 0, height: 8)
     }
 
     func heightForLocation(message: MessageType, at indexPath: IndexPath,
       with maxWidth: CGFloat, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-
-      // 3
       return 0
     }
 }

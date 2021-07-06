@@ -37,6 +37,43 @@ class DatabaseManager {
             }
             completion(true)
         })
+        
+        dataBase.child("users").observeSingleEvent(of: .value, with: { snapshot in
+            if var usersCollection = snapshot.value as? [[String: String]] {
+                // append to user dictionary
+                let newElement = [
+                    "name": user.firstName + " " + user.lastName,
+                    "email": user.safeEmail
+                ]
+                usersCollection.append(newElement)
+
+                self.dataBase.child("users").setValue(usersCollection, withCompletionBlock: { error, _ in
+                    guard error == nil else {
+                        completion(false)
+                        return
+                    }
+
+                    completion(true)
+                })
+            }
+            else {
+                // create that array
+                let newCollection: [[String: String]] = [
+                    [
+                        "name": user.firstName + " " + user.lastName,
+                        "email": user.safeEmail
+                    ]
+                ]
+                self.dataBase.child("users").setValue(newCollection, withCompletionBlock: { error, _ in
+                    guard error == nil else {
+                        completion(false)
+                        return
+                    }
+
+                    completion(true)
+                })
+            }
+        })
     }
     
     func sendMessage(message: Message, completion: @escaping (_ success: Bool) -> Void) {
@@ -159,7 +196,6 @@ class DatabaseManager {
         }
     }
     
-    /// Get all users from database
     public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void) {
         dataBase.child("users").observeSingleEvent(of: .value, with: { snapshot in
             guard let value = snapshot.value as? [[String: String]] else {
@@ -207,5 +243,5 @@ class DatabaseManager {
             }
         }
     }
-
 }
+

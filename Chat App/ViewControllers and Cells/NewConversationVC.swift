@@ -38,21 +38,23 @@ class NewConversationVC: UIViewController {
         label.isHidden = true
         label.text = "No Results"
         label.textAlignment = .center
-        label.textColor = .green
+        label.textColor = .gray
         label.font = .systemFont(ofSize: 21, weight: .medium)
         return label
     }()
-
+    
+    var background: UIImageView = {
+        let background = UIImageView()
+        background.image = UIImage(named: "1")
+        background.contentMode = .scaleToFill
+        return background
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(noResultsLabel)
         view.addSubview(tableView)
-        
-        let background = UIImageView();
-        background.image = UIImage(named: "1");
-        background.contentMode = .scaleToFill
-        tableView.addSubview(background)
-        
+        tableView.backgroundView = background
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -60,9 +62,10 @@ class NewConversationVC: UIViewController {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.topItem?.titleView = searchBar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel",
-                                                            style: .done,
+                                                            style: .plain,
                                                             target: self,
                                                             action: #selector(dismissSelf))
+        navigationItem.rightBarButtonItem?.tintColor = .purple
         searchBar.becomeFirstResponder()
     }
 

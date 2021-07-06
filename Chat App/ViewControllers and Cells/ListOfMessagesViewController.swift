@@ -35,6 +35,13 @@ class ListOfMessagesViewController: UIViewController {
 
     private var loginObserver: NSObjectProtocol?
     
+    var background: UIImageView = {
+        let background = UIImageView()
+        background.image = UIImage(named: "1");
+        background.contentMode = .scaleToFill
+        return background
+    }()
+   
     //MARK: Life Cycle
 
     override func viewDidLoad() {
@@ -42,12 +49,8 @@ class ListOfMessagesViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose,target: self, action: #selector(didTapComposeButton))
         view.addSubview(tableView)
         view.addSubview(noConversationsLabel)
-        
-        let background = UIImageView();
-        background.image = UIImage(named: "1");
-        background.contentMode = .scaleToFill
-        view.addSubview(background)
-        
+        tableView.backgroundView = background
+
         setupTableView()
         listenForMessages()
 
