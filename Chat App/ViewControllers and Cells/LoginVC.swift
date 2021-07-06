@@ -37,6 +37,7 @@ class LoginVC: UIViewController, LoginButtonDelegate {
         loginWithFB.sizeThatFits(CGSize(width: 50, height: 50))
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+        navigationController?.navigationBar.tintColor = .purple
     
         titleLabel.text = ""
         var characterIndex = 0
@@ -57,7 +58,7 @@ class LoginVC: UIViewController, LoginButtonDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if AccessToken.current !=  nil {
+        if AccessToken.current != nil {
             showListOfMessagesVC()
         }
     }
@@ -145,7 +146,8 @@ class LoginVC: UIViewController, LoginButtonDelegate {
     }
     
     func showListOfMessagesVC() {
-        let vc = ListOfMessagesViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let resultViewController = storyBoard.instantiateViewController(withIdentifier: "ListOfMessagesViewController") as! ListOfMessagesViewController
+        self.navigationController?.pushViewController(resultViewController, animated: false)
     }
 }

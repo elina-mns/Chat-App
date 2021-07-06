@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SGF-Lp-KLD">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚡️Chat App⚡️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLQ-Br-JGy">
-                                <rect key="frame" x="124.5" y="288" width="165.5" height="30"/>
+                                <rect key="frame" x="124.5" y="332" width="165.5" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -55,6 +55,7 @@
                             <constraint firstAttribute="bottom" secondItem="mxV-aa-EuM" secondAttribute="bottom" id="xHl-hK-S8Q"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="myo-Jz-SrT"/>
                     <connections>
                         <outlet property="loginWithFB" destination="fRt-vY-vRg" id="d5l-KK-cUV"/>
                         <outlet property="loginWithGoogle" destination="D65-MU-IDY" id="PoZ-9q-inW"/>
@@ -63,7 +64,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="228" y="-469"/>
+            <point key="canvasLocation" x="1137.68115942029" y="-469.41964285714283"/>
         </scene>
         <!--Messages-->
         <scene sceneID="M5P-iO-EjL">
@@ -82,6 +83,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vl9-Y5-0bv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="228" y="357"/>
+        </scene>
+        <!--List Of Messages View Controller-->
+        <scene sceneID="gCE-YW-ACF">
+            <objects>
+                <viewController storyboardIdentifier="ListOfMessagesViewController" id="Tph-Ny-oif" customClass="ListOfMessagesViewController" customModule="Chat_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1P8-d7-6cX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="fjb-hI-UUZ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dHf-JB-KvV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1291" y="361"/>
         </scene>
         <!--ChatViewController-->
         <scene sceneID="jVP-Oe-Kbq">
@@ -141,6 +157,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zVj-9w-Is0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1383" y="1123"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WTn-JB-cA8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SGF-Lp-KLD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="A7L-e2-nfd">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="0ud-D9-gWJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Keq-yk-1af" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="227.536231884058" y="-469.41964285714283"/>
         </scene>
     </scenes>
     <resources>

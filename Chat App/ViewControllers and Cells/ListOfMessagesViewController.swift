@@ -11,6 +11,8 @@ import JGProgressHUD
 
 
 class ListOfMessagesViewController: UIViewController {
+    
+    //MARK: Properties:
 
     private var conversations = [Conversation]()
 
@@ -32,6 +34,8 @@ class ListOfMessagesViewController: UIViewController {
     }()
 
     private var loginObserver: NSObjectProtocol?
+    
+    //MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +58,22 @@ class ListOfMessagesViewController: UIViewController {
             strongSelf.listenForMessages()
         })
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        validateAuth()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
+        noConversationsLabel.frame = CGRect(x: 10,
+                                            y: (view.bounds.height - 100)/2,
+                                            width: view.bounds.width - 20,
+                                            height: 100)
+    }
+    
+    //MARK: Listen for messages
 
     private func listenForMessages() {
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
@@ -96,7 +116,6 @@ class ListOfMessagesViewController: UIViewController {
             guard let strongSelf = self else {
                 return
             }
-
             let currentConversations = strongSelf.conversations
 
             if let targetConversation = currentConversations.first(where: {
@@ -144,21 +163,7 @@ class ListOfMessagesViewController: UIViewController {
             }
         })
     }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
-        noConversationsLabel.frame = CGRect(x: 10,
-                                            y: (view.bounds.height - 100)/2,
-                                            width: view.bounds.width - 20,
-                                            height: 100)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        validateAuth()
-    }
-
+    
     private func validateAuth() {
         if FirebaseAuth.Auth.auth().currentUser == nil {
             let vc = LoginVC()
@@ -174,6 +179,8 @@ class ListOfMessagesViewController: UIViewController {
     }
 
 }
+
+   //MARK: Table View methods
 
 extension ListOfMessagesViewController: UITableViewDelegate, UITableViewDataSource {
 
