@@ -51,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
               let lastName = user.profile.familyName else { return }
         
         let chatUser = ProfileInfo(firstName: firstName, lastName: lastName, email: email, id: user.userID)
+        
         activityIndicator.show(in: getCurrentViewController()?.view ?? UIView())
         DatabaseManager.shared.addUser(user: chatUser, completion: { success in
             if success {

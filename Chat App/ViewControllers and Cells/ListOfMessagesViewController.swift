@@ -53,10 +53,8 @@ class ListOfMessagesViewController: UIViewController {
         view.addSubview(tableView)
         view.addSubview(noConversationsLabel)
         tableView.backgroundView = background
-
         setupTableView()
         listenForMessages()
-
         loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification, object: nil, queue: .main, using: { [weak self] _ in
             guard let strongSelf = self else {
                 return

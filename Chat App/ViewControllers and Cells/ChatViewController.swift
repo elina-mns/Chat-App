@@ -234,15 +234,33 @@ extension ChatViewController {
     }
     
     func sendMessage(message: Message) {
-        DatabaseManager.shared.sendMessage(message: message) { success in
-            if success {
-                self.messageInputBar.inputTextView.text = nil
-                print("message was sent")
-            } else {
-                self.showAlert(title: "Error",
-                               message: "Failed to send a message. Please try again later.",
-                               actionForOk: nil)
+        if isNewConversation {
+            DatabaseManager.shared.createNewConversation(with: otherUserEmail, name: title ?? "User", firstMessage: message, completion:  { [weak self] success in
+                if success {
+                    print("message sent")
+                    self?.isNewConversation = false
+                    let newConversationId = "conversation_\(message.messageId)"
+                    self?.conversationId = newConversationId
+                    self?.listenMessages(id: newConversationId)
+                    self?.messageInputBar.inputTextView.text = nil
+                }
+                else {
+                    print("process failed")
+                }
+            })
+        } else {
+            guard let conversationId = conversationId, let name = self.title else {
+                return
             }
+            DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: otherUserEmail, name: name, newMessage: message, completion: { [weak self] success in
+                if success {
+                    self?.messageInputBar.inputTextView.text = nil
+                    print("message sent")
+                }
+                else {
+                    print("process failed")
+                }
+            })
         }
     }
         
