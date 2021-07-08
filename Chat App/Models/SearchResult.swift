@@ -9,5 +9,6 @@ import Foundation
 
 struct SearchResult {
     let name: String
+    let lastName: String
     let email: String
 }

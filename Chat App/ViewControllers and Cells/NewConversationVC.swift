@@ -14,7 +14,7 @@ class NewConversationVC: UIViewController {
 
     public var completion: ((SearchResult) -> (Void))?
     private let spinner = JGProgressHUD(style: .dark)
-    private var users = [[String: String]]()
+    private var users = [ProfileInfo]()
     private var results = [SearchResult]()
     private var hasFetched = false
     
@@ -156,24 +156,17 @@ extension NewConversationVC: UISearchBarDelegate {
         guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String, hasFetched else {
             return
         }
-        let safeEmail = DatabaseManager.safeEmail(emailAddress: currentUserEmail)
+        //let safeEmail = DatabaseManager.safeEmail(emailAddress: currentUserEmail)
         self.spinner.dismiss()
 
         let results: [SearchResult] = users.filter({
-            guard let email = $0["email"], email != safeEmail else {
-                return false
-            }
-            guard let name = $0["name"]?.lowercased() else {
-                return false
-            }
+            let name = $0.firstName.lowercased()
             return name.hasPrefix(term.lowercased())
         }).compactMap({
-
-            guard let email = $0["email"],
-                let name = $0["name"] else {
-                return nil
-            }
-            return SearchResult(name: name, email: email)
+            let email = $0.email
+            let name = $0.firstName
+            let lastName = $0.lastName
+            return SearchResult(name: name, lastName: lastName, email: email)
         })
         self.results = results
         updateUI()

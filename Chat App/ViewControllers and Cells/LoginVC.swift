@@ -125,7 +125,7 @@ class LoginVC: UIViewController, LoginButtonDelegate {
                 print("Failed to get email and name from Facebook")
                 return
             }
-            
+          
             let chatUser = ProfileInfo(firstName: firstName, lastName: lastName, email: email, id: userId)
             
             DatabaseManager.shared.addUser(user: chatUser, completion: { success in

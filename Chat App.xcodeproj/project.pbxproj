@@ -208,6 +208,7 @@
 				31556EF7255DA120009D3C09 /* ChatModel.swift */,
 				3175BD7F2562F72A0024FBB1 /* Gif.swift */,
 				3195AB5226938CD600B1E9A6 /* SearchResult.swift */,
+				31EC2BD82554A8D700DCC091 /* ProfileInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -217,7 +218,6 @@
 			children = (
 				3100A47F25535BB500EB31EA /* LoginVC.swift */,
 				3100A44D255356C700EB31EA /* ChatViewController.swift */,
-				31EC2BD82554A8D700DCC091 /* ProfileInfo.swift */,
 				3110455F2555F6C5000089BE /* ProfileSettingsViewController.swift */,
 				3175BD93256361CA0024FBB1 /* GifCollectionViewCell.swift */,
 				3195AB4A2693736B00B1E9A6 /* ListOfMessagesViewController.swift */,

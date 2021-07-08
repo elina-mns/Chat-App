@@ -481,13 +481,16 @@ class DatabaseManager {
         }
     }
     
-    public func getAllUsers(completion: @escaping (Result<[[String: String]], Error>) -> Void) {
+    public func getAllUsers(completion: @escaping (Result<[ProfileInfo], Error>) -> Void) {
         dataBase.child("users").observeSingleEvent(of: .value, with: { snapshot in
-            guard let value = snapshot.value as? [[String: String]] else {
+            guard let dictionary = snapshot.value as? [String: Any] else {
                 completion(.failure(DatabaseError.failedToFetch))
                 return
             }
-            completion(.success(value))
+            let profileInfos: [ProfileInfo] = dictionary.compactMap { (key, value) in
+                ProfileInfo(userId: key, from: value as? [String: Any] ?? [:])
+            }
+            completion(.success(profileInfos))
         })
     }
 

@@ -23,3 +23,18 @@ struct ProfileInfo {
         return "\(id)_profile_pic.png"
     }
 }
+
+extension ProfileInfo {
+    
+    init?(userId: String, from profileInfoDict: [String: Any]) {
+        guard let firstName = profileInfoDict["first_name"] as? String,
+              let lastName = profileInfoDict["last_name"] as? String,
+              let email = profileInfoDict["email"] as? String else {
+            return nil
+        }
+        self.id = userId
+        self.firstName = firstName
+        self.lastName = lastName
+        self.email = email
+    }
+}
